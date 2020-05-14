@@ -1,0 +1,1064 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		24BACAF7EC8642F8C6B11A48 /* Pods_RetroSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10B04C64F777752B6306F82B /* Pods_RetroSwift.framework */; };
+		25DD865CD3FC093364810C1D /* Pods_Pods_RetroSwift_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EA15DA7B128D593BBC8172 /* Pods_Pods_RetroSwift_Tests.framework */; };
+		3D7E1A6DC06A0B93F73F3107 /* Pods_Pods_RetroSwift_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D35EF4EDE4CC23610A38DE /* Pods_Pods_RetroSwift_Example.framework */; };
+		61657A9329E83FE7D31E84AD99908EB0 /* RetroSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E59F6DAC9992BEE182A3E3DCB8811EE /* RetroSwift-dummy.m */; };
+		718FA59E246100D800B7CFF9 /* HTTPRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA57E246100D700B7CFF9 /* HTTPRequestInterceptor.swift */; };
+		718FA59F246100D800B7CFF9 /* HttpRequestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA57F246100D700B7CFF9 /* HttpRequestMethod.swift */; };
+		718FA5A0246100D800B7CFF9 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA580246100D700B7CFF9 /* Interceptor.swift */; };
+		718FA5A1246100D800B7CFF9 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA581246100D700B7CFF9 /* HTTPClient.swift */; };
+		718FA5A2246100D800B7CFF9 /* Dictionary+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA583246100D700B7CFF9 /* Dictionary+Description.swift */; };
+		718FA5A3246100D800B7CFF9 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA585246100D700B7CFF9 /* Logger.swift */; };
+		718FA5A4246100D800B7CFF9 /* ResponseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA588246100D700B7CFF9 /* ResponseObject.swift */; };
+		718FA5A5246100D800B7CFF9 /* RetroSwiftError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA589246100D700B7CFF9 /* RetroSwiftError.swift */; };
+		718FA5A6246100D800B7CFF9 /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA58B246100D700B7CFF9 /* LogLevel.swift */; };
+		718FA5A7246100D800B7CFF9 /* DELETE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA58D246100D700B7CFF9 /* DELETE.swift */; };
+		718FA5A8246100D800B7CFF9 /* PATCH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA58E246100D700B7CFF9 /* PATCH.swift */; };
+		718FA5A9246100D800B7CFF9 /* POST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA58F246100D700B7CFF9 /* POST.swift */; };
+		718FA5AA246100D800B7CFF9 /* GET.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA590246100D700B7CFF9 /* GET.swift */; };
+		718FA5AB246100D800B7CFF9 /* PUT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA591246100D700B7CFF9 /* PUT.swift */; };
+		718FA5AC246100D800B7CFF9 /* RetroSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA592246100D700B7CFF9 /* RetroSwift.swift */; };
+		718FA5AD246100D800B7CFF9 /* LinuxMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA594246100D700B7CFF9 /* LinuxMain.swift */; };
+		718FA5BB2461017800B7CFF9 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA5B42461017800B7CFF9 /* URLProtocolStub.swift */; };
+		718FA5BC2461017800B7CFF9 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA5B52461017800B7CFF9 /* BaseTestCase.swift */; };
+		718FA5BD2461017800B7CFF9 /* UserMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA5B72461017800B7CFF9 /* UserMock.swift */; };
+		718FA5BE2461017800B7CFF9 /* GETMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA5B92461017800B7CFF9 /* GETMethodTests.swift */; };
+		718FA5BF2461017800B7CFF9 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA5BA2461017800B7CFF9 /* XCTestManifests.swift */; };
+		718FA5C12461071600B7CFF9 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718FA5C02461071600B7CFF9 /* Package.swift */; };
+		791CE8DDB867ABDD6B035B76986FF031 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		9877889C749575220A98AF2788F1D60D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		A31DCDF6DF060FE349437D29ABE88B1A /* Pods-RetroSwift_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0C9EB1D8AD37473E7F95E15085B057 /* Pods-RetroSwift_Example-dummy.m */; };
+		B045A216D2E1D16A8BB10521582C5B22 /* Pods-RetroSwift_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 376390800B69E157E68DE3490004F3D8 /* Pods-RetroSwift_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B705CCDB44FF7ACBFF173037EFEF0F94 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		BFEB21EC22251C79D2F339D1A92E74FF /* Pods-RetroSwift_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3841E5D9105617A9C1F49B873F12E3E1 /* Pods-RetroSwift_Tests-dummy.m */; };
+		CAB16512323209082CC07A323FFFF5AC /* RetroSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E1F1E8A6D3BC51C56A0CDFD138087B09 /* RetroSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F909C285AA564D682998A9C99B5CE3D7 /* Pods-RetroSwift_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 318CC7D5B592A58BC8D01844CD6DA2D3 /* Pods-RetroSwift_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		194EDBF5D5404C0495593C82FC31217C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 14BB7602A295042EB88D4A93BA947B88;
+			remoteInfo = "Pods-RetroSwift_Example";
+		};
+		4B835CF09824BB3964F41714F6EE5E3A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 19ED2DFE995BD8CC23669ECAECB7DAC0;
+			remoteInfo = RetroSwift;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		04103FD03E2C31277AE1AB3C3F5F6F1A /* RetroSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RetroSwift.debug.xcconfig; sourceTree = "<group>"; };
+		07E4AD7A477D09AFE2DDDBB7864F5717 /* Pods-RetroSwift_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RetroSwift_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		10B04C64F777752B6306F82B /* Pods_RetroSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RetroSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		12B2C125D9F135C4B6CC6051E29CC6BC /* RetroSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RetroSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22EDDB29EB028E0853EF1E35EF045806 /* Pods_RetroSwift_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RetroSwift_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		258CB41B27B35C6602E6BC171CD82623 /* RetroSwift.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = RetroSwift.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		2D98C5E450BC152F47AC56A2FF3EF614 /* Pods-RetroSwift_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RetroSwift_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		2E59F6DAC9992BEE182A3E3DCB8811EE /* RetroSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RetroSwift-dummy.m"; sourceTree = "<group>"; };
+		3011215DE8DD242DE2EE71EEEEA14B5A /* Pods-RetroSwift_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RetroSwift_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		318CC7D5B592A58BC8D01844CD6DA2D3 /* Pods-RetroSwift_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-RetroSwift_Example-umbrella.h"; sourceTree = "<group>"; };
+		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		376390800B69E157E68DE3490004F3D8 /* Pods-RetroSwift_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-RetroSwift_Tests-umbrella.h"; sourceTree = "<group>"; };
+		3841E5D9105617A9C1F49B873F12E3E1 /* Pods-RetroSwift_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RetroSwift_Tests-dummy.m"; sourceTree = "<group>"; };
+		3CCCD5B63758B4668B08CCAC /* Pods-Pods-RetroSwift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pods-RetroSwift_Example.debug.xcconfig"; path = "Target Support Files/Pods-Pods-RetroSwift_Example/Pods-Pods-RetroSwift_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		3F6E82DD3B2F18CEBAD5A6E1DC462010 /* RetroSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RetroSwift.release.xcconfig; sourceTree = "<group>"; };
+		445934A068533145A1D737FD294AE444 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		5955BAFFBB4FA49E7E5C9F61A64D7087 /* Pods-RetroSwift_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RetroSwift_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		5EF3551343B0E5C1D30C519C671DF14A /* Pods-RetroSwift_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RetroSwift_Example-frameworks.sh"; sourceTree = "<group>"; };
+		605DADD05E02DA86DCCC7081 /* Pods-RetroSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RetroSwift.release.xcconfig"; path = "Target Support Files/Pods-RetroSwift/Pods-RetroSwift.release.xcconfig"; sourceTree = "<group>"; };
+		63E5B17BFE0971A51153B9D74D12D28D /* Pods_RetroSwift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RetroSwift_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E2C2F862B8AF19275BAC676 /* Pods-Pods-RetroSwift_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pods-RetroSwift_Tests.debug.xcconfig"; path = "Target Support Files/Pods-Pods-RetroSwift_Tests/Pods-Pods-RetroSwift_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		702923F204DE938549D553194FC78A88 /* Pods-RetroSwift_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-RetroSwift_Tests.modulemap"; sourceTree = "<group>"; };
+		718FA57E246100D700B7CFF9 /* HTTPRequestInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestInterceptor.swift; sourceTree = "<group>"; };
+		718FA57F246100D700B7CFF9 /* HttpRequestMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequestMethod.swift; sourceTree = "<group>"; };
+		718FA580246100D700B7CFF9 /* Interceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
+		718FA581246100D700B7CFF9 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		718FA583246100D700B7CFF9 /* Dictionary+Description.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Description.swift"; sourceTree = "<group>"; };
+		718FA585246100D700B7CFF9 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		718FA588246100D700B7CFF9 /* ResponseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseObject.swift; sourceTree = "<group>"; };
+		718FA589246100D700B7CFF9 /* RetroSwiftError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetroSwiftError.swift; sourceTree = "<group>"; };
+		718FA58B246100D700B7CFF9 /* LogLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogLevel.swift; sourceTree = "<group>"; };
+		718FA58D246100D700B7CFF9 /* DELETE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DELETE.swift; sourceTree = "<group>"; };
+		718FA58E246100D700B7CFF9 /* PATCH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PATCH.swift; sourceTree = "<group>"; };
+		718FA58F246100D700B7CFF9 /* POST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POST.swift; sourceTree = "<group>"; };
+		718FA590246100D700B7CFF9 /* GET.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GET.swift; sourceTree = "<group>"; };
+		718FA591246100D700B7CFF9 /* PUT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PUT.swift; sourceTree = "<group>"; };
+		718FA592246100D700B7CFF9 /* RetroSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetroSwift.swift; sourceTree = "<group>"; };
+		718FA594246100D700B7CFF9 /* LinuxMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
+		718FA5B42461017800B7CFF9 /* URLProtocolStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
+		718FA5B52461017800B7CFF9 /* BaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
+		718FA5B72461017800B7CFF9 /* UserMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMock.swift; sourceTree = "<group>"; };
+		718FA5B92461017800B7CFF9 /* GETMethodTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GETMethodTests.swift; sourceTree = "<group>"; };
+		718FA5BA2461017800B7CFF9 /* XCTestManifests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
+		718FA5C02461071600B7CFF9 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../../Package.swift; sourceTree = "<group>"; };
+		7263B32343EA93E2BF2B2432D6BC7392 /* Pods-RetroSwift_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RetroSwift_Tests-Info.plist"; sourceTree = "<group>"; };
+		73C4BE212F4FC3C0ADA8514B61A18A1E /* Pods-RetroSwift_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RetroSwift_Example.release.xcconfig"; sourceTree = "<group>"; };
+		7E25F900A8CEECBBBD18010C5BBB198A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		7F7158B16101C03928F24CFF /* Pods-RetroSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RetroSwift.debug.xcconfig"; path = "Target Support Files/Pods-RetroSwift/Pods-RetroSwift.debug.xcconfig"; sourceTree = "<group>"; };
+		8BBCD7BB871CDF61AC46E2AFB9445A0A /* RetroSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RetroSwift-prefix.pch"; sourceTree = "<group>"; };
+		96D35EF4EDE4CC23610A38DE /* Pods_Pods_RetroSwift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pods_RetroSwift_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CCF39CA4181FF721A7B88F6 /* Pods-Pods-RetroSwift_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pods-RetroSwift_Example.release.xcconfig"; path = "Target Support Files/Pods-Pods-RetroSwift_Example/Pods-Pods-RetroSwift_Example.release.xcconfig"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A0EA15DA7B128D593BBC8172 /* Pods_Pods_RetroSwift_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pods_RetroSwift_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A42BD9D3EE00FA8AD2D1B74DB973720E /* Pods-RetroSwift_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RetroSwift_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		BBEF18479DDAFDA2F397F057 /* Pods-Pods-RetroSwift_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pods-RetroSwift_Tests.release.xcconfig"; path = "Target Support Files/Pods-Pods-RetroSwift_Tests/Pods-Pods-RetroSwift_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		CA2ADCBD3E5580C95DDEE1074840EA58 /* Pods-RetroSwift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RetroSwift_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		D3698103D8C9A7C7A56EF1DE1F1B8692 /* Pods-RetroSwift_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RetroSwift_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		D91C2A508DD2C92AD337D124A7F3DEE2 /* RetroSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = RetroSwift.modulemap; sourceTree = "<group>"; };
+		E1D483C577A19D213F8ABA998DEB50FE /* RetroSwift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "RetroSwift-Info.plist"; sourceTree = "<group>"; };
+		E1F1E8A6D3BC51C56A0CDFD138087B09 /* RetroSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RetroSwift-umbrella.h"; sourceTree = "<group>"; };
+		EA8EB231C732573A6507B573820F7E4A /* Pods-RetroSwift_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RetroSwift_Example-Info.plist"; sourceTree = "<group>"; };
+		EE0C9EB1D8AD37473E7F95E15085B057 /* Pods-RetroSwift_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RetroSwift_Example-dummy.m"; sourceTree = "<group>"; };
+		F89D4A0771997D9D65964DD0A9EDC284 /* Pods-RetroSwift_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-RetroSwift_Example.modulemap"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3B4677252407F26F5AA14A30803A77CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9877889C749575220A98AF2788F1D60D /* Foundation.framework in Frameworks */,
+				24BACAF7EC8642F8C6B11A48 /* Pods_RetroSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		709E76C78B1481A5C4ED8B405D5BF762 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				791CE8DDB867ABDD6B035B76986FF031 /* Foundation.framework in Frameworks */,
+				3D7E1A6DC06A0B93F73F3107 /* Pods_Pods_RetroSwift_Example.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF496199275B7AA30C80A5D3021D7C0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B705CCDB44FF7ACBFF173037EFEF0F94 /* Foundation.framework in Frameworks */,
+				25DD865CD3FC093364810C1D /* Pods_Pods_RetroSwift_Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0D233AB8711EA19B80CADB2477309350 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				7E25F900A8CEECBBBD18010C5BBB198A /* LICENSE */,
+				445934A068533145A1D737FD294AE444 /* README.md */,
+				258CB41B27B35C6602E6BC171CD82623 /* RetroSwift.podspec */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		3C2FD4791FF139EAD4C1A46B4B35749F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				63E5B17BFE0971A51153B9D74D12D28D /* Pods_RetroSwift_Example.framework */,
+				22EDDB29EB028E0853EF1E35EF045806 /* Pods_RetroSwift_Tests.framework */,
+				12B2C125D9F135C4B6CC6051E29CC6BC /* RetroSwift.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		53EC5DD0317F4A40E2F35000 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3CCCD5B63758B4668B08CCAC /* Pods-Pods-RetroSwift_Example.debug.xcconfig */,
+				9CCF39CA4181FF721A7B88F6 /* Pods-Pods-RetroSwift_Example.release.xcconfig */,
+				6E2C2F862B8AF19275BAC676 /* Pods-Pods-RetroSwift_Tests.debug.xcconfig */,
+				BBEF18479DDAFDA2F397F057 /* Pods-Pods-RetroSwift_Tests.release.xcconfig */,
+				7F7158B16101C03928F24CFF /* Pods-RetroSwift.debug.xcconfig */,
+				605DADD05E02DA86DCCC7081 /* Pods-RetroSwift.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		718FA57B246100D700B7CFF9 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				718FA57C246100D700B7CFF9 /* Internal */,
+				718FA586246100D700B7CFF9 /* API */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		718FA57C246100D700B7CFF9 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				718FA57D246100D700B7CFF9 /* HTTPClient */,
+				718FA582246100D700B7CFF9 /* Extension */,
+				718FA584246100D700B7CFF9 /* Logger */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		718FA57D246100D700B7CFF9 /* HTTPClient */ = {
+			isa = PBXGroup;
+			children = (
+				718FA57E246100D700B7CFF9 /* HTTPRequestInterceptor.swift */,
+				718FA57F246100D700B7CFF9 /* HttpRequestMethod.swift */,
+				718FA580246100D700B7CFF9 /* Interceptor.swift */,
+				718FA581246100D700B7CFF9 /* HTTPClient.swift */,
+			);
+			path = HTTPClient;
+			sourceTree = "<group>";
+		};
+		718FA582246100D700B7CFF9 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				718FA583246100D700B7CFF9 /* Dictionary+Description.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		718FA584246100D700B7CFF9 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				718FA585246100D700B7CFF9 /* Logger.swift */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
+		718FA586246100D700B7CFF9 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				718FA587246100D700B7CFF9 /* ResponseObject */,
+				718FA58A246100D700B7CFF9 /* Log */,
+				718FA58C246100D700B7CFF9 /* HTTPRequestMethod */,
+				718FA592246100D700B7CFF9 /* RetroSwift.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		718FA587246100D700B7CFF9 /* ResponseObject */ = {
+			isa = PBXGroup;
+			children = (
+				718FA588246100D700B7CFF9 /* ResponseObject.swift */,
+				718FA589246100D700B7CFF9 /* RetroSwiftError.swift */,
+			);
+			path = ResponseObject;
+			sourceTree = "<group>";
+		};
+		718FA58A246100D700B7CFF9 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				718FA58B246100D700B7CFF9 /* LogLevel.swift */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
+		718FA58C246100D700B7CFF9 /* HTTPRequestMethod */ = {
+			isa = PBXGroup;
+			children = (
+				718FA58D246100D700B7CFF9 /* DELETE.swift */,
+				718FA58E246100D700B7CFF9 /* PATCH.swift */,
+				718FA58F246100D700B7CFF9 /* POST.swift */,
+				718FA590246100D700B7CFF9 /* GET.swift */,
+				718FA591246100D700B7CFF9 /* PUT.swift */,
+			);
+			path = HTTPRequestMethod;
+			sourceTree = "<group>";
+		};
+		718FA593246100D700B7CFF9 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				718FA5B82461017800B7CFF9 /* HTTPRequestMethodTests */,
+				718FA5B32461017800B7CFF9 /* Infrastructure */,
+				718FA5B62461017800B7CFF9 /* TestModel */,
+				718FA5BA2461017800B7CFF9 /* XCTestManifests.swift */,
+				718FA594246100D700B7CFF9 /* LinuxMain.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		718FA5B32461017800B7CFF9 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				718FA5B42461017800B7CFF9 /* URLProtocolStub.swift */,
+				718FA5B52461017800B7CFF9 /* BaseTestCase.swift */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		718FA5B62461017800B7CFF9 /* TestModel */ = {
+			isa = PBXGroup;
+			children = (
+				718FA5B72461017800B7CFF9 /* UserMock.swift */,
+			);
+			path = TestModel;
+			sourceTree = "<group>";
+		};
+		718FA5B82461017800B7CFF9 /* HTTPRequestMethodTests */ = {
+			isa = PBXGroup;
+			children = (
+				718FA5B92461017800B7CFF9 /* GETMethodTests.swift */,
+			);
+			path = HTTPRequestMethodTests;
+			sourceTree = "<group>";
+		};
+		7BE796E819C9D11D4B6F46C74A68821E /* Pods-RetroSwift_Example */ = {
+			isa = PBXGroup;
+			children = (
+				F89D4A0771997D9D65964DD0A9EDC284 /* Pods-RetroSwift_Example.modulemap */,
+				3011215DE8DD242DE2EE71EEEEA14B5A /* Pods-RetroSwift_Example-acknowledgements.markdown */,
+				A42BD9D3EE00FA8AD2D1B74DB973720E /* Pods-RetroSwift_Example-acknowledgements.plist */,
+				EE0C9EB1D8AD37473E7F95E15085B057 /* Pods-RetroSwift_Example-dummy.m */,
+				5EF3551343B0E5C1D30C519C671DF14A /* Pods-RetroSwift_Example-frameworks.sh */,
+				EA8EB231C732573A6507B573820F7E4A /* Pods-RetroSwift_Example-Info.plist */,
+				318CC7D5B592A58BC8D01844CD6DA2D3 /* Pods-RetroSwift_Example-umbrella.h */,
+				CA2ADCBD3E5580C95DDEE1074840EA58 /* Pods-RetroSwift_Example.debug.xcconfig */,
+				73C4BE212F4FC3C0ADA8514B61A18A1E /* Pods-RetroSwift_Example.release.xcconfig */,
+			);
+			name = "Pods-RetroSwift_Example";
+			path = "Target Support Files/Pods-RetroSwift_Example";
+			sourceTree = "<group>";
+		};
+		A874B3711278B8D1032D63B771BB02F3 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				D91C2A508DD2C92AD337D124A7F3DEE2 /* RetroSwift.modulemap */,
+				2E59F6DAC9992BEE182A3E3DCB8811EE /* RetroSwift-dummy.m */,
+				E1D483C577A19D213F8ABA998DEB50FE /* RetroSwift-Info.plist */,
+				8BBCD7BB871CDF61AC46E2AFB9445A0A /* RetroSwift-prefix.pch */,
+				E1F1E8A6D3BC51C56A0CDFD138087B09 /* RetroSwift-umbrella.h */,
+				04103FD03E2C31277AE1AB3C3F5F6F1A /* RetroSwift.debug.xcconfig */,
+				3F6E82DD3B2F18CEBAD5A6E1DC462010 /* RetroSwift.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/RetroSwift";
+			sourceTree = "<group>";
+		};
+		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		C11C85F5486AFB10E1DF64DFBF39B45C /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7BE796E819C9D11D4B6F46C74A68821E /* Pods-RetroSwift_Example */,
+				F99DD2126CC1C95C107673BB92D806AC /* Pods-RetroSwift_Tests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				718FA5C02461071600B7CFF9 /* Package.swift */,
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D80859377A50FF3C1C0FAA3B2CC1AFD5 /* Development Pods */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				3C2FD4791FF139EAD4C1A46B4B35749F /* Products */,
+				C11C85F5486AFB10E1DF64DFBF39B45C /* Targets Support Files */,
+				53EC5DD0317F4A40E2F35000 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C0834CEBB1379A84116EF29F93051C60 /* iOS */,
+				96D35EF4EDE4CC23610A38DE /* Pods_Pods_RetroSwift_Example.framework */,
+				A0EA15DA7B128D593BBC8172 /* Pods_Pods_RetroSwift_Tests.framework */,
+				10B04C64F777752B6306F82B /* Pods_RetroSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D80859377A50FF3C1C0FAA3B2CC1AFD5 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E5260F77F92B1DC8083C9CED9164E3AF /* RetroSwift */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		E5260F77F92B1DC8083C9CED9164E3AF /* RetroSwift */ = {
+			isa = PBXGroup;
+			children = (
+				718FA57B246100D700B7CFF9 /* Sources */,
+				718FA593246100D700B7CFF9 /* Tests */,
+				0D233AB8711EA19B80CADB2477309350 /* Pod */,
+				A874B3711278B8D1032D63B771BB02F3 /* Support Files */,
+			);
+			name = RetroSwift;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		F99DD2126CC1C95C107673BB92D806AC /* Pods-RetroSwift_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				702923F204DE938549D553194FC78A88 /* Pods-RetroSwift_Tests.modulemap */,
+				07E4AD7A477D09AFE2DDDBB7864F5717 /* Pods-RetroSwift_Tests-acknowledgements.markdown */,
+				5955BAFFBB4FA49E7E5C9F61A64D7087 /* Pods-RetroSwift_Tests-acknowledgements.plist */,
+				3841E5D9105617A9C1F49B873F12E3E1 /* Pods-RetroSwift_Tests-dummy.m */,
+				7263B32343EA93E2BF2B2432D6BC7392 /* Pods-RetroSwift_Tests-Info.plist */,
+				376390800B69E157E68DE3490004F3D8 /* Pods-RetroSwift_Tests-umbrella.h */,
+				D3698103D8C9A7C7A56EF1DE1F1B8692 /* Pods-RetroSwift_Tests.debug.xcconfig */,
+				2D98C5E450BC152F47AC56A2FF3EF614 /* Pods-RetroSwift_Tests.release.xcconfig */,
+			);
+			name = "Pods-RetroSwift_Tests";
+			path = "Target Support Files/Pods-RetroSwift_Tests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		1EBA739E55FB50E0457C34463765596B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F909C285AA564D682998A9C99B5CE3D7 /* Pods-RetroSwift_Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6871135B540BB689A9F09170763840F1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B045A216D2E1D16A8BB10521582C5B22 /* Pods-RetroSwift_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9392A2296D32C4E31892AC20889C4C7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAB16512323209082CC07A323FFFF5AC /* RetroSwift-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		14BB7602A295042EB88D4A93BA947B88 /* Pods-RetroSwift_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83BF4B0D029985AE86A3080866F704C3 /* Build configuration list for PBXNativeTarget "Pods-RetroSwift_Example" */;
+			buildPhases = (
+				0454A1272866BB9A215C3851 /* [CP] Check Pods Manifest.lock */,
+				1EBA739E55FB50E0457C34463765596B /* Headers */,
+				905B75AEA5B03DA2C55C722359531E0D /* Sources */,
+				709E76C78B1481A5C4ED8B405D5BF762 /* Frameworks */,
+				DF4EDF6A83F55298B81DC960251D4116 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5F5A8739C446266D23995A8E681CDF29 /* PBXTargetDependency */,
+			);
+			name = "Pods-RetroSwift_Example";
+			productName = "Pods-RetroSwift_Example";
+			productReference = 63E5B17BFE0971A51153B9D74D12D28D /* Pods_RetroSwift_Example.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		19ED2DFE995BD8CC23669ECAECB7DAC0 /* RetroSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4FEF5B1F057B60074C503393A13B0145 /* Build configuration list for PBXNativeTarget "RetroSwift" */;
+			buildPhases = (
+				0D808A0495530FBFD268CBC8 /* [CP] Check Pods Manifest.lock */,
+				E9392A2296D32C4E31892AC20889C4C7 /* Headers */,
+				BFA02E31F1D2055E4513D6EC460AB8C6 /* Sources */,
+				3B4677252407F26F5AA14A30803A77CF /* Frameworks */,
+				B531732E599AD93F37FA226E0A7DA0D3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RetroSwift;
+			productName = RetroSwift;
+			productReference = 12B2C125D9F135C4B6CC6051E29CC6BC /* RetroSwift.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		21AA65DEAFEC943F1F6494D78A869618 /* Pods-RetroSwift_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C324A9A5438B9AD76822A9CD718434A9 /* Build configuration list for PBXNativeTarget "Pods-RetroSwift_Tests" */;
+			buildPhases = (
+				0E72DC25D59B9B223EEC584F /* [CP] Check Pods Manifest.lock */,
+				6871135B540BB689A9F09170763840F1 /* Headers */,
+				32A074E61248F63415C66B7C9DDCCA6B /* Sources */,
+				BF496199275B7AA30C80A5D3021D7C0B /* Frameworks */,
+				24F2FA3D12DA7BF291541FFBDB07067B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C4CCCE602AA627E67D5ACC1F9D685730 /* PBXTargetDependency */,
+			);
+			name = "Pods-RetroSwift_Tests";
+			productName = "Pods-RetroSwift_Tests";
+			productReference = 22EDDB29EB028E0853EF1E35EF045806 /* Pods_RetroSwift_Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "_Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 3C2FD4791FF139EAD4C1A46B4B35749F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				14BB7602A295042EB88D4A93BA947B88 /* Pods-RetroSwift_Example */,
+				21AA65DEAFEC943F1F6494D78A869618 /* Pods-RetroSwift_Tests */,
+				19ED2DFE995BD8CC23669ECAECB7DAC0 /* RetroSwift */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		24F2FA3D12DA7BF291541FFBDB07067B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B531732E599AD93F37FA226E0A7DA0D3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF4EDF6A83F55298B81DC960251D4116 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0454A1272866BB9A215C3851 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Pods-RetroSwift_Example-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0D808A0495530FBFD268CBC8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RetroSwift-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0E72DC25D59B9B223EEC584F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Pods-RetroSwift_Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		32A074E61248F63415C66B7C9DDCCA6B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFEB21EC22251C79D2F339D1A92E74FF /* Pods-RetroSwift_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		905B75AEA5B03DA2C55C722359531E0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				718FA5A2246100D800B7CFF9 /* Dictionary+Description.swift in Sources */,
+				718FA5AB246100D800B7CFF9 /* PUT.swift in Sources */,
+				718FA59F246100D800B7CFF9 /* HttpRequestMethod.swift in Sources */,
+				718FA5BE2461017800B7CFF9 /* GETMethodTests.swift in Sources */,
+				718FA5A1246100D800B7CFF9 /* HTTPClient.swift in Sources */,
+				718FA5AD246100D800B7CFF9 /* LinuxMain.swift in Sources */,
+				718FA5AC246100D800B7CFF9 /* RetroSwift.swift in Sources */,
+				718FA5C12461071600B7CFF9 /* Package.swift in Sources */,
+				718FA5A6246100D800B7CFF9 /* LogLevel.swift in Sources */,
+				718FA5AA246100D800B7CFF9 /* GET.swift in Sources */,
+				A31DCDF6DF060FE349437D29ABE88B1A /* Pods-RetroSwift_Example-dummy.m in Sources */,
+				718FA5A3246100D800B7CFF9 /* Logger.swift in Sources */,
+				718FA5BF2461017800B7CFF9 /* XCTestManifests.swift in Sources */,
+				718FA5A4246100D800B7CFF9 /* ResponseObject.swift in Sources */,
+				718FA5BC2461017800B7CFF9 /* BaseTestCase.swift in Sources */,
+				718FA5A7246100D800B7CFF9 /* DELETE.swift in Sources */,
+				718FA59E246100D800B7CFF9 /* HTTPRequestInterceptor.swift in Sources */,
+				718FA5BD2461017800B7CFF9 /* UserMock.swift in Sources */,
+				718FA5BB2461017800B7CFF9 /* URLProtocolStub.swift in Sources */,
+				718FA5A5246100D800B7CFF9 /* RetroSwiftError.swift in Sources */,
+				718FA5A9246100D800B7CFF9 /* POST.swift in Sources */,
+				718FA5A8246100D800B7CFF9 /* PATCH.swift in Sources */,
+				718FA5A0246100D800B7CFF9 /* Interceptor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFA02E31F1D2055E4513D6EC460AB8C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61657A9329E83FE7D31E84AD99908EB0 /* RetroSwift-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5F5A8739C446266D23995A8E681CDF29 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RetroSwift;
+			target = 19ED2DFE995BD8CC23669ECAECB7DAC0 /* RetroSwift */;
+			targetProxy = 4B835CF09824BB3964F41714F6EE5E3A /* PBXContainerItemProxy */;
+		};
+		C4CCCE602AA627E67D5ACC1F9D685730 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-RetroSwift_Example";
+			target = 14BB7602A295042EB88D4A93BA947B88 /* Pods-RetroSwift_Example */;
+			targetProxy = 194EDBF5D5404C0495593C82FC31217C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		142E754CDB11E4EFF44B8B85C8AF9FBD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04103FD03E2C31277AE1AB3C3F5F6F1A /* RetroSwift.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/RetroSwift/RetroSwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/RetroSwift/RetroSwift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/RetroSwift/RetroSwift.modulemap";
+				PRODUCT_MODULE_NAME = RetroSwift;
+				PRODUCT_NAME = RetroSwift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4DBB473EA7A34989CF1D6681A6DB22A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CA2ADCBD3E5580C95DDEE1074840EA58 /* Pods-RetroSwift_Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-RetroSwift_Example/Pods-RetroSwift_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RetroSwift_Example/Pods-RetroSwift_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		64F5909E7F34F63F966903CADB4BC7A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 73C4BE212F4FC3C0ADA8514B61A18A1E /* Pods-RetroSwift_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-RetroSwift_Example/Pods-RetroSwift_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RetroSwift_Example/Pods-RetroSwift_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		73EF95B29CCD2E04C74CAE392B2EB970 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D98C5E450BC152F47AC56A2FF3EF614 /* Pods-RetroSwift_Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-RetroSwift_Tests/Pods-RetroSwift_Tests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RetroSwift_Tests/Pods-RetroSwift_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		78F089EE4E4646049E15C4B48E7F6011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3698103D8C9A7C7A56EF1DE1F1B8692 /* Pods-RetroSwift_Tests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-RetroSwift_Tests/Pods-RetroSwift_Tests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RetroSwift_Tests/Pods-RetroSwift_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B0087CB4594321EF41619F3181FE120E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		B8BCBD0110C2658BB5DAADB9B7D97B92 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		DE9FB70FFE0A8385138359BD13DDE78D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F6E82DD3B2F18CEBAD5A6E1DC462010 /* RetroSwift.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/RetroSwift/RetroSwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/RetroSwift/RetroSwift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/RetroSwift/RetroSwift.modulemap";
+				PRODUCT_MODULE_NAME = RetroSwift;
+				PRODUCT_NAME = RetroSwift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "_Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B8BCBD0110C2658BB5DAADB9B7D97B92 /* Debug */,
+				B0087CB4594321EF41619F3181FE120E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4FEF5B1F057B60074C503393A13B0145 /* Build configuration list for PBXNativeTarget "RetroSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				142E754CDB11E4EFF44B8B85C8AF9FBD /* Debug */,
+				DE9FB70FFE0A8385138359BD13DDE78D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83BF4B0D029985AE86A3080866F704C3 /* Build configuration list for PBXNativeTarget "Pods-RetroSwift_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DBB473EA7A34989CF1D6681A6DB22A0 /* Debug */,
+				64F5909E7F34F63F966903CADB4BC7A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C324A9A5438B9AD76822A9CD718434A9 /* Build configuration list for PBXNativeTarget "Pods-RetroSwift_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78F089EE4E4646049E15C4B48E7F6011 /* Debug */,
+				73EF95B29CCD2E04C74CAE392B2EB970 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

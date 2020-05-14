@@ -1,0 +1,16 @@
+PODS:
+  - RetroSwift (0.1.0)
+
+DEPENDENCIES:
+  - RetroSwift (from `../`)
+
+EXTERNAL SOURCES:
+  RetroSwift:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  RetroSwift: 2ab7fcef754a5f983cd503c67b20c55b52bebe46
+
+PODFILE CHECKSUM: 50ee186f63c3eb685c5b098057c40a572795a1cf
+
+COCOAPODS: 1.9.1
