@@ -88,7 +88,7 @@ open class RetroSwiftLogger: Logger {
     
 }
 
-extension RetroSwiftLogger {
+public extension RetroSwiftLogger {
     static var basic: RetroSwiftLogger { RetroSwiftLogger(level: .basic) }
     static var body: RetroSwiftLogger { RetroSwiftLogger(level: .body) }
     static var headers: RetroSwiftLogger { RetroSwiftLogger(level: .headers) }

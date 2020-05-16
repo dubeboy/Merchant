@@ -27,8 +27,11 @@ Type-safe HTTP client for the  iOS, iPadOS, macOS, watchOS, tvOS platform inspir
   s.author           = { 'dubeboy' => 'dubedivine@gmail.com' }
   s.source           = { :git => 'https://github.com/dubeboy/RetroSwift.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-  s.swift_versions = ['5.2']
+  s.swift_versions = ['5.1', '5.2']
   s.ios.deployment_target = '10.0'
+#  s.osx.deployment_target = '10.12'
+#  s.tvos.deployment_target = '10.0'
+#  s.watchos.deployment_target = '3.0'
   s.default_subspec = "Core"
 
   # s.resource_bundles = {
@@ -46,7 +49,7 @@ Type-safe HTTP client for the  iOS, iPadOS, macOS, watchOS, tvOS platform inspir
   end
 
   s.test_spec 'Tests' do |test_spec|
-   test_spec.source_files = 'Tests/*.'
+   test_spec.source_files = 'Tests/**/*'
    test_spec.dependency 'Mocker', '~> 2.0.0' # This dependency will only be linked with your tests.
  end
 

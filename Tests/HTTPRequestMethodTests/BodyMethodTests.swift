@@ -105,7 +105,7 @@ class PostTests: XCTestCase {
         
         let post = POST<UserMock, UserMock>("/some/random/path", body: UserMock.self)
         
-        post { response in
+        post(body: UserMock(name: "Some", surname: "Name")) { response in
             let rawResponse = try! response.get().raw
             XCTAssertEqual(rawResponse.request!.url!.path, "/hello/some/random/path")
             exp.fulfill()
@@ -122,7 +122,7 @@ class PostTests: XCTestCase {
         
         let post = POST<UserMock, UserMock>(body: UserMock.self)
         
-        post { response in
+        post(body: postUserMock) { response in
             let rawResponse = try! response.get().raw
             XCTAssertEqual(rawResponse.request!.url!.absoluteString, baseURL)
             exp.fulfill()
@@ -140,7 +140,7 @@ class PostTests: XCTestCase {
         
         let post = POST<UserMock, UserMock>("/users/{user_id}/profile/{comment_id}", body: UserMock.self)
         
-        post(["user_id": "56", "comment_id": "45"]) { response in
+        post(["user_id": "56", "comment_id": "45"], body: postUserMock) { response in
             let rawResponse = try! response.get().raw
             XCTAssertEqual(rawResponse.request!.url!.path, "/hello/users/56/profile/45")
             exp.fulfill()

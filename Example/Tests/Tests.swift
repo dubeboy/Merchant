@@ -1,5 +1,4 @@
 import XCTest
-import RetroSwift
 
 class Tests: XCTestCase {
     

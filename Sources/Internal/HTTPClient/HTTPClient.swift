@@ -7,7 +7,6 @@ struct HTTPClient<T: Decodable> {
     
     let logger: Logger = RetroSwift.logger
     let decoder: JSONDecoder = JSONDecoder()
-    // should be computed FORM URL Encoder or not?
     let requestInterceptor: HTTPRequestInterceptor
     let session: Session
     

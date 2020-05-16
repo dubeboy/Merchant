@@ -5,6 +5,7 @@ import Alamofire
 
 let baseURL = "http://localhost/hello"
 let userMock = UserMock(name: "John", surname: "Snow")
+let postUserMock = UserMock(name: "Post", surname: "User")
     
 func stubAlamofire(mockTestURL: String = "http://localhost/hello",
                    statusCode: Int = 200,

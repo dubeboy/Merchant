@@ -4,18 +4,18 @@ import Foundation
 public struct PATCH<T: Decodable, U: Encodable>: HttpRequestMethod {
     
     let path: String
-    let body: U.Type?
+    let body: U.Type
     let formURLEncoded: Bool
     let headers: [String: String]?
     
     public var wrappedValue: T {
-        get { preconditionFailure("Cannot get this value") }
-        set { preconditionFailure("Cannot set this value") }
+        get { preconditionFailure(.HTTP_METHOD_CANNOT_GET) }
+        set { preconditionFailure(.HTTP_METHOD_CANNOT_SET) }
     }
     
     public var projectedValue: Self { self }
     
-    public init(_ path: String = "", body: U.Type?, formURLEncoded: Bool = false, headers: [String: String]? = nil) {
+    public init(_ path: String = "", body: U.Type, formURLEncoded: Bool = false, headers: [String: String]? = nil) {
         self.path = path
         self.body = body
         self.formURLEncoded = formURLEncoded
@@ -33,7 +33,7 @@ public struct PATCH<T: Decodable, U: Encodable>: HttpRequestMethod {
 
 extension PATCH {
     func callAsFunction(_ path: [String: String]? = nil, query parameters: [String: String]? = nil,
-                        body: U?, completion: @escaping Completion<T>) {
+                        body: U, completion: @escaping Completion<T>) {
         patch(pathParameters: path, queryParameters: parameters, body: body, completion: completion)
     }
 }

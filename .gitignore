@@ -3,3 +3,8 @@
 /Packages
 /*.xcodeproj
 xcuserdata/
+
+# CocoaPods example project pods
+/Example/Pods/
+
+Example/build/

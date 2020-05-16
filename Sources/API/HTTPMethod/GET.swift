@@ -4,11 +4,11 @@ import Foundation
 public struct GET<T: Decodable>: HttpRequestMethod {
     
     var path: String
-    var headers: [String: String]? = nil
+    var headers: [String: String]?
     
     public var wrappedValue: T {
-        get { preconditionFailure("You cannot get this value") }
-        set { preconditionFailure("You cannot set this value") }
+        get { preconditionFailure(.HTTP_METHOD_CANNOT_GET) }
+        set { preconditionFailure(.HTTP_METHOD_CANNOT_SET) }
     }
     
     public var projectedValue: Self { self }
