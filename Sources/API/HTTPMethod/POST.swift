@@ -4,18 +4,18 @@ import Foundation
 public struct POST<T: Decodable, U: Encodable>: HttpRequestMethod {
     
     let path: String
-    let body: U.Type?
+    let body: U.Type
     let formURLEncoded: Bool
     let headers: [String: String]?
    
     public var wrappedValue: T {
-        get { preconditionFailure("Cannot get this value") }
-        set { preconditionFailure("Cannot set this value") }
+        get { preconditionFailure(.HTTP_METHOD_CANNOT_GET) }
+        set { preconditionFailure(.HTTP_METHOD_CANNOT_SET) }
     }
     
     public var projectedValue: Self { self }
     
-    public init(_ path: String = "", body: U.Type?, formURLEncoded: Bool = false,
+    public init(_ path: String = "", body: U.Type, formURLEncoded: Bool = false,
                 headers: [String: String]? = nil) {
         self.path = path
         self.body = body
@@ -36,7 +36,7 @@ public struct POST<T: Decodable, U: Encodable>: HttpRequestMethod {
 extension POST {
     func callAsFunction(_ path: [String: String]? = nil,
                         query parameters: [String: String]? = nil,
-                        body: U? = nil,
+                        body: U,
                         completion: @escaping Completion<T>) {
         post(pathParameters: path, queryParameters: parameters, body: body, completion: completion)
     }

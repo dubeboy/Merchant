@@ -1,12 +1,10 @@
+platform :ios, '10.0'
 use_frameworks!
 
 target 'RetroSwift_Example' do
-  pod 'RetroSwift', :path => '../'
+  pod 'RetroSwift', :path => '../', :testspecs => ['Tests'] 
 
   target 'RetroSwift_Tests' do
     inherit! :search_paths
-    
-    
-    
   end
 end

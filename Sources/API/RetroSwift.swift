@@ -31,10 +31,10 @@ public class RetroSwift {
     
     public class Builder {
         
-        var baseUrl: String?
-        var logger: RetroSwiftLogger?
-        var query: [String: String]?  // test for encoded URLQuery items
-        var session: Session?
+        private(set) var baseUrl: String?
+        private(set) var logger: RetroSwiftLogger?
+        private(set) var query: [String: String]?
+        private(set) var session: Session?
         
         public init() { }
      
@@ -55,9 +55,7 @@ public class RetroSwift {
             self.session = session
             return self
         }
-        
-//        public func timeOut
-        
+                
         @discardableResult
         public func query(_ query: [String: String]) -> Self {
             self.query = query

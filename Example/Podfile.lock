@@ -1,16 +1,31 @@
 PODS:
-  - RetroSwift (0.1.0)
+  - Alamofire (5.1.0)
+  - Mocker (2.0.2)
+  - RetroSwift (0.1.0):
+    - RetroSwift/Core (= 0.1.0)
+  - RetroSwift/Core (0.1.0):
+    - Alamofire (~> 5.0)
+  - RetroSwift/Tests (0.1.0):
+    - Mocker (~> 2.0.0)
 
 DEPENDENCIES:
   - RetroSwift (from `../`)
+  - RetroSwift/Tests (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Mocker
 
 EXTERNAL SOURCES:
   RetroSwift:
     :path: "../"
 
 SPEC CHECKSUMS:
-  RetroSwift: 2ab7fcef754a5f983cd503c67b20c55b52bebe46
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  Mocker: 0f0e41a3d47868b42879d2aa177a16f9097a48a4
+  RetroSwift: 2655dfb570536c624ed0be8e0a0d36e240abba20
 
-PODFILE CHECKSUM: 50ee186f63c3eb685c5b098057c40a572795a1cf
+PODFILE CHECKSUM: 0b1475cfbf10dc3e26c45a5e46b9ab7d1fb85030
 
 COCOAPODS: 1.9.1

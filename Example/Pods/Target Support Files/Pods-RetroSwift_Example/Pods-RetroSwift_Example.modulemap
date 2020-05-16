@@ -1,6 +1,0 @@
-framework module Pods_RetroSwift_Example {
-  umbrella header "Pods-RetroSwift_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}

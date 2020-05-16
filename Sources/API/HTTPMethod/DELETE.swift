@@ -4,11 +4,11 @@ import Foundation
 public struct DELETE<T: Decodable>: HttpRequestMethod {
     
     var path: String
-    var headers: [String: String]? = nil
+    var headers: [String: String]?
     
     public var wrappedValue: T {
-        get { preconditionFailure("Cannot get this value") } 
-        set { preconditionFailure("Cannot set this value") }
+        get { preconditionFailure(.HTTP_METHOD_CANNOT_GET) }
+        set { preconditionFailure(.HTTP_METHOD_CANNOT_SET) }
     }
     
     public var projectedValue: Self { self }
@@ -37,6 +37,7 @@ extension DELETE { // play with clause
                     completion: completion)
     }
 }
+
 
 
 
