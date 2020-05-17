@@ -2,7 +2,6 @@
     <img src="RetroSwift.png" width="600" max-width="90%" alt="RetroSwift" />
 </p>
 
-![build](https://github.com/dubeboy/Retroswift/workflows/build/badge.svg)
 <p align="center">
     <img src="https://img.shields.io/badge/Swift-5.2-orange.svg" />
     <a href="https://swift.org/package-manager">
