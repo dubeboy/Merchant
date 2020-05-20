@@ -1,0 +1,10 @@
+platform :ios, '10.0'
+use_frameworks!
+
+target 'Merchant_Example' do
+  pod 'Merchant', :path => '../', :testspecs => ['Tests'] 
+
+  target 'Merchant_Tests' do
+    inherit! :search_paths
+  end
+end
