@@ -149,7 +149,7 @@ extension String {
 
 extension XCTestCase {
     func makeRequest(logLevel: LogLevel, logResponse: @escaping (_ message: [String]) -> Void) {
-        let logger = MockRetroSwiftLogger(logLevel)
+        let logger = MockMerchantLogger(logLevel)
         stubPostAlamofire(mockTestURL: baseURL,
                           method: .post,
                           data: userMock,

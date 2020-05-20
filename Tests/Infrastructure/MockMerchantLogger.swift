@@ -1,7 +1,7 @@
 import Foundation
 @testable import Merchant
 
-class MockRetroSwiftLogger: MerchantLogger {
+class MockMerchantLogger: MerchantLogger {
     
     convenience init(_ logLevel: LogLevel) {
         self.init(level: logLevel, loggerOutput: MockSTDOutLogger())

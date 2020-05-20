@@ -1,5 +1,5 @@
 import XCTest
-import Merchant
+//import Merchant
 
 class Tests: XCTestCase {
     
