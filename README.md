@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="RetroSwift.png" width="600" max-width="90%" alt="RetroSwift" />
+    <img src="merchant.png" width="600" max-width="90%" alt="merchant" />
 </p>
 
 <p align="center">
@@ -7,11 +7,11 @@
     <a href="https://swift.org/package-manager">
         <img src="https://img.shields.io/badge/swiftpm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager" />
     </a>
-    <a href="https://cocoapods.org/pods/RetroSwift">
-        <img src="https://img.shields.io/cocoapods/v/RetroSwift.svg?style=flat" alt="Retroswift cocoapods" />
+    <a href="https://cocoapods.org/pods/Merchant">
+        <img src="https://img.shields.io/cocoapods/v/Merchant.svg?style=flat" alt="Merchant cocoapods" />
     </a>
-    <a href="https://github.com/dubeboy/Retroswift/actions">
-        <img src="https://github.com/dubeboy/Retroswift/workflows/build/badge.svg" alt="build status" />
+    <a href="https://github.com/dubeboy/Merchant/actions">
+        <img src="https://github.com/dubeboy/Merchant/workflows/build/badge.svg" alt="build status" />
     </a>
      <a href="/LICENSE">
         <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat" alt="MIT License" />
@@ -21,31 +21,31 @@
     </a>
 </p>
 
-Retroswift is a type-safe HTTP client for iOS, iPadOS, macOS, watchOS and tvOS. Inspired by https://github.com/square/retrofit.
+Merchant is a type-safe HTTP client for iOS, iPadOS, macOS, watchOS and tvOS. Inspired by https://github.com/square/retrofit.
 
-it allows you to simply "property wrap" any codable Swift struct and RetroSwift will do all the heavy lifting of initiating the HTTP request and decoding the HTTP response data into your model all in a type safe and declarative way.
+it allows you to simply "property wrap" any codable Swift struct and Merchant will do all the heavy lifting of initiating the HTTP request and decoding the HTTP response data into your model all in a type safe and declarative way.
 
 # Installation
 
 ### CocoaPods
 
-RetroSwift is available through [CocoaPods](https://swift.org/package-manage). To install
+Merchant is available through [CocoaPods](https://swift.org/package-manage). To install
 it, simply add the following line to your Podfilet
 
 ```ruby
-pod 'RetroSwift'
+pod 'Merchant'
 ```
 
 ### Swift Package Manager 
 
-RetroSwift is available through [Swift Package Manager](https://cocoapods.org). To install
+Merchant is available through [Swift Package Manager](https://cocoapods.org). To install
 it, simply add the following to your `Package.swift` file.
 
 ```swift
 let package = Package(
     ...
     dependencies: [
-        .package(url: "https://github.com/dubeboy/RetroSwift.git", from: "0.1.0")
+        .package(url: "https://github.com/dubeboy/Merchant.git", from: "0.1.0")
     ],
     ...
 )
@@ -68,29 +68,29 @@ struct Weather: Codable {
 }
 ```
 
-## Initialize RetroSwift in AppDelegate.
+## Initialize Merchant in AppDelegate.
 
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let builder = RetroSwift.Builder()
+        let builder = Merchant.Builder()
             .baseUrl("http://api.openweathermap.org/data/2.5")
             .build()
-        RetroSwift(builder: builder)
+        Merchant(builder: builder)
         return true
  }
  ```
 
- ### Customization RetroSwift Initilization 
+ ### Customization Merchant Initilization 
 
-As a minimum to initialize RetroSwift we would need to simply set the `baseUrl` like in the above code snippet, but RetroSwift has a few more initialization customization options:
+As a minimum to initialize Merchant we would need to simply set the `baseUrl` like in the above code snippet, but Merchant has a few more initialization customization options:
  
 Set how verbose the `logger` should output to the debug console. Availbale options are:
 
-`.body` - log everything all requests and reposense from your API(default).
-`.basic` - log only the request method and request URL.
-`.header` - log only the request url, request headers and response headers.
-`.nothing` - do not log anything.
+- `.body` - log everything all requests and reposense from your API(default).
+- `.basic` - log only the request method and request URL.
+- `.header` - log only the request url, request headers and response headers.
+- `.nothing` - do not log anything.
 
 For example you can set the basic log level like so: 
 
@@ -98,9 +98,9 @@ For example you can set the basic log level like so:
 builder.logger(.basic)
 ```
 
-RetroSwift uses Alamofire under the hood, so `RetroSwift.Builder` gives you the option to pass in a customized Alamofire `Session`. 
+Merchant uses Alamofire under the hood, so `Merchant.Builder` gives you the option to pass in a customized Alamofire `Session`. 
 
-For example you can setup how RetroSwift handles your TLS security like so: 
+For example you can setup how Merchant handles your TLS security like so: 
 
 ```swift
 let manager = ServerTrustManager(evaluators: [url: PinnedCertificatesTrustEvaluator()])
@@ -250,4 +250,4 @@ Twitter: @divinedube
 
 ## License
 
-RetroSwift is available under the MIT license. See the LICENSE file for more info.
+Merchant is available under the MIT license. See the LICENSE file for more info.
