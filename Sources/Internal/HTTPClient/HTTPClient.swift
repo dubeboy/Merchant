@@ -5,7 +5,7 @@ public typealias Completion<T: Decodable> = (_ result: Result<ResponseObject<T>,
 
 struct HTTPClient<T: Decodable> {
     
-    let logger: Logger = RetroSwift.logger
+    let logger: Logger = Merchant.logger
     let decoder: JSONDecoder = JSONDecoder()
     let requestInterceptor: HTTPRequestInterceptor
     let session: Session

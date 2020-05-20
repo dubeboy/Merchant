@@ -13,12 +13,12 @@ protocol HttpRequestMethod {
 
 extension HttpRequestMethod {
     
-    private var baseURL: String { RetroSwift.baseUrl }
-    private var globalQueries: [String: String]? { RetroSwift.globalQuery }
-    private var session: Session { RetroSwift.session }
+    private var baseURL: String { Merchant.baseUrl }
+    private var globalQueries: [String: String]? { Merchant.globalQuery }
+    private var session: Session { Merchant.session }
     
     var client: HTTPClient<T> {
-        HTTPClient(requestInterceptor: RetroSwift.logInterceptor, session: RetroSwift.session)
+        HTTPClient(requestInterceptor: Merchant.logInterceptor, session: Merchant.session)
     }
     
     func createURL(with pathParameters: [String: String]?,
