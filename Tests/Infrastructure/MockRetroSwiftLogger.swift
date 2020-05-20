@@ -1,14 +1,7 @@
-//
-//  File.swift
-//  
-//
-//  Created by Divine.Dube on 2020/05/12.
-//
-
 import Foundation
-@testable import RetroSwift
+@testable import Merchant
 
-class MockRetroSwiftLogger: RetroSwiftLogger {
+class MockRetroSwiftLogger: MerchantLogger {
     
     convenience init(_ logLevel: LogLevel) {
         self.init(level: logLevel, loggerOutput: MockSTDOutLogger())

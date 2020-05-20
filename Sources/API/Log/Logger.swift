@@ -9,7 +9,7 @@ protocol Logger {
 }
 
 
-open class RetroSwiftLogger: Logger {
+open class MerchantLogger: Logger {
 
     let level: LogLevel
     let output = "➡️"
@@ -88,9 +88,9 @@ open class RetroSwiftLogger: Logger {
     
 }
 
-public extension RetroSwiftLogger {
-    static var basic: RetroSwiftLogger { RetroSwiftLogger(level: .basic) }
-    static var body: RetroSwiftLogger { RetroSwiftLogger(level: .body) }
-    static var headers: RetroSwiftLogger { RetroSwiftLogger(level: .headers) }
-    static var nothing: RetroSwiftLogger { RetroSwiftLogger(level: .nothing) }
+public extension MerchantLogger {
+    static var basic: MerchantLogger { MerchantLogger(level: .basic) }
+    static var body: MerchantLogger { MerchantLogger(level: .body) }
+    static var headers: MerchantLogger { MerchantLogger(level: .headers) }
+    static var nothing: MerchantLogger { MerchantLogger(level: .nothing) }
 }

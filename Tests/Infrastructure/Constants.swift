@@ -1,7 +1,7 @@
 import Foundation
 import Mocker
 import Alamofire
-@testable import RetroSwift
+@testable import Merchant
 
 let baseURL = "http://localhost/hello"
 let userMock = UserMock(name: "John", surname: "Snow")
@@ -19,13 +19,13 @@ func stubAlamofire(mockTestURL: String = "http://localhost/hello",
     let config = URLSessionConfiguration.af.default
     config.protocolClasses = [MockingURLProtocol.self] + (config.protocolClasses ?? [])
     let session = Session(configuration: config)
-    let builder = RetroSwift.Builder()
+    let builder = Merchant.Builder()
         .baseUrl(baseURL)
         .logger(.nothing)
         .session(session)
         .build()
     
-    RetroSwift(builder: builder)
+    Merchant(builder: builder)
 }
 
 func stubPostAlamofire<T: Encodable>(mockTestURL: String = "http://localhost/hello/new_user",
@@ -33,7 +33,7 @@ func stubPostAlamofire<T: Encodable>(mockTestURL: String = "http://localhost/hel
                                      method: Mock.HTTPMethod = .post,
                                      data: T,
                                      globalQuery: Bool = false,
-                                     logger: RetroSwiftLogger = .nothing
+                                     logger: MerchantLogger = .nothing
 ) {
     let mockedData = try! JSONEncoder().encode(data)
     
@@ -47,7 +47,7 @@ func stubPostAlamofire<T: Encodable>(mockTestURL: String = "http://localhost/hel
     let config = URLSessionConfiguration.af.default
     config.protocolClasses = [MockingURLProtocol.self] + (config.protocolClasses ?? [])
     let session = Session(configuration: config)
-    let builder = RetroSwift.Builder()
+    let builder = Merchant.Builder()
         .baseUrl(baseURL)
         .logger(logger)
         .session(session)
@@ -56,7 +56,7 @@ func stubPostAlamofire<T: Encodable>(mockTestURL: String = "http://localhost/hel
         builder.query(["api_key": "1234567890_XYZ"])
     }
     
-    RetroSwift(builder: builder.build())
+    Merchant(builder: builder.build())
 }
 
 

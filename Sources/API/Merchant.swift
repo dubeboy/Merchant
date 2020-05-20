@@ -1,12 +1,11 @@
 import Alamofire
 
-//@propertyWrapper
-public class RetroSwift {
+public class Merchant {
    
     private static var _builder: Builder?
     
     static var builder: Builder {
-        guard let builder = RetroSwift._builder else {
+        guard let builder = Merchant._builder else {
             preconditionFailure("RetroSwift builder is nil")
         }
         return builder
@@ -19,20 +18,20 @@ public class RetroSwift {
         return baseUrl
     }
     
-    static var logger: Logger { builder.logger ?? RetroSwiftLogger(level: .body) }
+    static var logger: Logger { builder.logger ?? MerchantLogger(level: .body) }
     static var session: Session { builder.session ?? AF }
     static var globalQuery: [String: String]? { builder.query }
-    static var logInterceptor: HTTPRequestInterceptor { HTTPRequestInterceptor(logger: RetroSwift.logger) }
+    static var logInterceptor: HTTPRequestInterceptor { HTTPRequestInterceptor(logger: Merchant.logger) }
         
     @discardableResult
     public init(builder: Builder) {
-        RetroSwift._builder = builder
+        Merchant._builder = builder
     }
     
     public class Builder {
         
         private(set) var baseUrl: String?
-        private(set) var logger: RetroSwiftLogger?
+        private(set) var logger: MerchantLogger?
         private(set) var query: [String: String]?
         private(set) var session: Session?
         
@@ -45,7 +44,7 @@ public class RetroSwift {
         }
         
         @discardableResult
-        public func logger(_ logger: RetroSwiftLogger) -> Self {
+        public func logger(_ logger: MerchantLogger) -> Self {
             self.logger = logger
             return self
         }

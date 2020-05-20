@@ -1,5 +1,5 @@
 import XCTest
-@testable import RetroSwift
+@testable import Merchant
 
 final class MethodTests: XCTestCase  {
     

@@ -1,13 +1,12 @@
 //
 //  AppDelegate.swift
-//  RetroSwift
+//  Merchant
 //
-//  Created by dubeboy on 05/05/2020.
+//  Created by dubeboy on 05/21/2020.
 //  Copyright (c) 2020 dubeboy. All rights reserved.
 //
 
 import UIKit
-import RetroSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,15 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        let builder = RetroSwift.Builder()
-            .baseUrl("demo-base-url")
-            .logger(.body)
-            .build()
-        
-        RetroSwift(builder: builder)
         return true
     }
 
