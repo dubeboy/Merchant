@@ -3,11 +3,11 @@ import Mocker
 import Alamofire
 @testable import Merchant
 
-let baseURL = "http://localhost/hello"
+let baseURL = "http://localhost:8080/hello"
 let userMock = UserMock(name: "John", surname: "Snow")
 let postUserMock = UserMock(name: "Post", surname: "User")
     
-func stubAlamofire(mockTestURL: String = "http://localhost/hello",
+func stubAlamofire(mockTestURL: String = baseURL,
                    statusCode: Int = 200,
                    method: Mock.HTTPMethod = .get
 ) {
