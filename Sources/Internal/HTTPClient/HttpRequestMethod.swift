@@ -27,8 +27,12 @@ extension HttpRequestMethod {
         let injectedPath = injectPath(with: pathParameters)
         let query = appendGlobalQuery(to: queryParameters)
         
+<<<<<<< HEAD
         var components = URLComponents(string: baseURL)
         components?.path += injectedPath
+=======
+        var components = URLComponents(string: baseURL + injectedPath)
+>>>>>>> hotfix/0.1.2
         components?.queryItems = query?.map { URLQueryItem(name: $0, value: $1) }
         
         guard let url = components?.url else {
@@ -56,7 +60,7 @@ extension HttpRequestMethod {
     private func appendGlobalQuery(to queries: [String: String]?) -> [String: String]? {
         if let queries = queries, !queries.isEmpty {
             return queries.merging(globalQueries ?? [:]) {
-                _,_  in preconditionFailure("Duplicate keys in query parameter: \(queries) and system wide query: \(String(describing: globalQueries)) ")
+                _,_  in preconditionFailure("Duplicate keys in query parameter: \(queries) and system wide query: \(String(describing: globalQueries))")
             }
         } else {
             return globalQueries

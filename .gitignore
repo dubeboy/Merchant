@@ -6,5 +6,5 @@ xcuserdata/
 
 # CocoaPods example project pods
 /Example/Pods/
-
-Example/build/
+/Example/build/
+/Example/Merchant.xcodeproj/xcshareddata/

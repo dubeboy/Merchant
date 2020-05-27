@@ -34,7 +34,7 @@ public struct POST<T: Decodable, U: Encodable>: HttpRequestMethod {
 }
 
 extension POST {
-    func callAsFunction(_ path: [String: String]? = nil,
+    public func callAsFunction(_ path: [String: String]? = nil,
                         query parameters: [String: String]? = nil,
                         body: U,
                         completion: @escaping Completion<T>) {
