@@ -32,7 +32,7 @@ public struct PATCH<T: Decodable, U: Encodable>: HttpRequestMethod {
 }
 
 extension PATCH {
-    func callAsFunction(_ path: [String: String]? = nil, query parameters: [String: String]? = nil,
+    public func callAsFunction(_ path: [String: String]? = nil, query parameters: [String: String]? = nil,
                         body: U, completion: @escaping Completion<T>) {
         patch(pathParameters: path, queryParameters: parameters, body: body, completion: completion)
     }

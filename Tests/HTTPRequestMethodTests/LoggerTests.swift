@@ -11,6 +11,8 @@ class LoggerTests: XCTestCase {
         }
     }
 
+    // where is the request path tests
+    
     func testBodyLevelRequestTimeIsLogged() {
         makeRequest(logLevel: .body) {
             XCTAssertTrue(self.matches($0[0], regex: .REGEX_TIME))

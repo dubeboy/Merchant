@@ -1,7 +1,7 @@
 import Foundation
 
 @propertyWrapper
-struct PUT<T: Decodable, U: Encodable>: HttpRequestMethod {
+public struct PUT<T: Decodable, U: Encodable>: HttpRequestMethod {
     
     let path: String
     let body: U.Type
