@@ -1,14 +1,14 @@
 import Foundation
 
 @propertyWrapper
-public struct DELETE<T: Decodable>: HttpRequestMethod {
+public struct DELETE<T: Decodable>: HttpMethod {
     
     var path: String
     var headers: [String: String]?
     
     public var wrappedValue: T {
-        get { preconditionFailure(.HTTP_METHOD_CANNOT_GET) }
-        set { preconditionFailure(.HTTP_METHOD_CANNOT_SET) }
+        get { preconditionFailure(.errorMethodGet) }
+        set { preconditionFailure(.errorMethodSet) }
     }
     
     public var projectedValue: Self { self }

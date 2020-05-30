@@ -1,7 +1,7 @@
 import Foundation
 
 @propertyWrapper
-public struct PATCH<T: Decodable, U: Encodable>: HttpRequestMethod {
+public struct PATCH<T: Decodable, U: Encodable>: HttpMethod {
     
     let path: String
     let body: U.Type
@@ -9,8 +9,8 @@ public struct PATCH<T: Decodable, U: Encodable>: HttpRequestMethod {
     let headers: [String: String]?
     
     public var wrappedValue: T {
-        get { preconditionFailure(.HTTP_METHOD_CANNOT_GET) }
-        set { preconditionFailure(.HTTP_METHOD_CANNOT_SET) }
+        get { preconditionFailure(.errorMethodGet) }
+        set { preconditionFailure(.errorMethodSet) }
     }
     
     public var projectedValue: Self { self }

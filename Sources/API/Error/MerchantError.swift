@@ -1,6 +1,7 @@
 import Foundation
 import Alamofire
 
-public enum RetroSwiftError: Error {
+// maybe network error
+public enum MerchantError: Error {
     case error(localizedDescription: String)
 }

@@ -1,75 +1,49 @@
 import Alamofire
 
-public class Merchant {
-   
-    private static var _builder: Builder?
+class Merchant {
     
-    static var builder: Builder {
-        guard let builder = Merchant._builder else {
-            preconditionFailure("RetroSwift builder is nil")
-        }
-        return builder
-    }
+    private let defaultLogger = MerchantLogger(level: .body)
     
-    static var baseUrl: String {
-        guard let baseUrl = builder.baseUrl, !baseUrl.isEmpty else {
-            preconditionFailure("Base URL is nil")
-        }
-        return baseUrl
-    }
+    var service: Service
     
-    static var logger: Logger { builder.logger ?? MerchantLogger(level: .body) }
-    static var session: Session { builder.session ?? AF }
-    static var globalQuery: [String: String]? { builder.query }
-    static var logInterceptor: HTTPRequestInterceptor { HTTPRequestInterceptor(logger: Merchant.logger) }
-        
-    @discardableResult
-    public init(builder: Builder) {
-        Merchant._builder = builder
-    }
+    var logger: MerchantLogger { service.logger ?? defaultLogger }
+    var session: Session { service.session ?? AF }
+    var globalQuery: [String: String]? { service.query }
+    var baseURL: String { service.baseURL }
     
-    public class Builder {
-        
-        private(set) var baseUrl: String?
-        private(set) var logger: MerchantLogger?
-        private(set) var query: [String: String]?
-        private(set) var session: Session?
-        
-        public init() { }
-     
-        @discardableResult
-        public func baseUrl(_ url: String) -> Self {
-            self.baseUrl = url
-            return self
-        }
-        
-        @discardableResult
-        public func logger(_ logger: MerchantLogger) -> Self {
-            self.logger = logger
-            return self
-        }
-         
-        @discardableResult
-        public func session(_ session: Session) -> Self {
-            self.session = session
-            return self
-        }
-                
-        @discardableResult
-        public func query(_ query: [String: String]) -> Self {
-            self.query = query
-            return self
-        }
-
-        public func build() -> Builder {
-            let builder = Builder()
-            builder.baseUrl = baseUrl
-            builder.logger = logger
-            builder.session = session
-            builder.query = query
-            return builder
-        }
+    init(service: Service) {
+        self.service = service
     }
 }
+
+struct MerchantInstance {
+    
+    static var _instance: Merchant?
+    
+    static var instance: Merchant {
+        guard let instance = Self._instance else { preconditionFailure(.errorNilInstance) }
+        return instance
+    }
+    
+    private init() {}
+    
+    static func create(service: Service) {
+        Self._instance = Merchant(service: service)
+    }
+}
+
+@propertyWrapper
+public struct Autowired<T: Service> {
+    
+    public var wrappedValue: T {
+        MerchantInstance.instance.service as! T
+    }
+    
+    public init(service: T = T()) {
+        MerchantInstance.create(service: service)
+    }
+}
+
+
 
 

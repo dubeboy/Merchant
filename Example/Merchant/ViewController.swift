@@ -7,12 +7,20 @@
 //
 
 import UIKit
+import Merchant
 
 class ViewController: UIViewController {
+    
+    @Autowired
+    var client: HTTPService
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        client.$get { _ in
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
