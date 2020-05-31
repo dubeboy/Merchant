@@ -1,8 +1,20 @@
 import Foundation
 
+class Holder {
+     var merchant: Merchant?
+}
+
 @propertyWrapper
-public struct GET<T: Decodable>: HttpMethod {
+public struct GET<T: Decodable>: MerchantHttpMethod {
     
+    let holder: Holder = Holder()
+    
+    var merchant: Merchant? {
+        didSet {
+            holder.merchant = merchant
+        }
+    }
+
     var path: String
     var headers: [String: String]?
     
@@ -18,7 +30,7 @@ public struct GET<T: Decodable>: HttpMethod {
         self.headers = headers
     }
 
-    func get(pathParameters: [String: String]?, queryParamters: [String: String]?,
+    func get(pathParameters: [String: String]? = nil, queryParamters: [String: String]? = nil,
              completion: @escaping Completion<T>) {
         let url = createURL(with: pathParameters, and: queryParamters)
         client.request(url: url, method: .get, headers: headers, completion: completion)

@@ -1,8 +1,15 @@
 import Foundation
 
 @propertyWrapper
-public struct CONNECT<T: Decodable>: HttpMethod {
+public struct CONNECT<T: Decodable>: MerchantHttpMethod {
+    let holder: Holder = Holder()
     
+    var merchant: Merchant? {
+        didSet {
+            holder.merchant = merchant
+        }
+    }
+
     var path: String
     var headers: [String: String]?
     

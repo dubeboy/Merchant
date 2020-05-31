@@ -5,6 +5,7 @@ public typealias Completion<T: Decodable> = (_ result: Result<ResponseObject<T>,
 
 struct HTTPClient<T: Decodable> {
     let session: Session
+    let logger: MerchantLogger
     let decoder: JSONDecoder = JSONDecoder()
     
     func request(url: String, method: HTTPMethod,
@@ -42,6 +43,9 @@ struct HTTPClient<T: Decodable> {
     
     private func processResponse(_ response: AFDataResponse<T>,
                                  completion: @escaping Completion<T>) {
+      
+        self.logger.log(response.response, data: response.data, metrics: response.metrics)
+        
         guard let urlResponse = response.response else {
             return completion(
                 .failure(

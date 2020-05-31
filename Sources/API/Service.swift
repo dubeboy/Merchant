@@ -3,7 +3,7 @@ import Alamofire
 
 public protocol Service {
     
-    var logger: MerchantLogger? { get }
+    var level: LogLevel? { get }
     var query: [String: String]? { get }
     var session: Session? { get }
     var baseURL: String { get }
@@ -14,21 +14,18 @@ public protocol Service {
 extension Service {
     
     public init() {
-        print("called ")
         self.init()
-       
     }
     
-    public var logger: MerchantLogger? {
-        nil
-    }
-    
-    public var query: [String: String]? {
-        nil
-    }
-    
+    public var level: LogLevel? { nil }
+    public var query: [String: String]? { nil }
     public var session: Session? {
-        nil
+        get {
+            return nil
+        }
+        set {
+           
+        }
     }
 }
 

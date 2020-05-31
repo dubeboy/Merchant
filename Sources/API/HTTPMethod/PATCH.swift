@@ -1,8 +1,15 @@
 import Foundation
 
 @propertyWrapper
-public struct PATCH<T: Decodable, U: Encodable>: HttpMethod {
+public struct PATCH<T: Decodable, U: Encodable>: MerchantHttpMethod {
+    let holder: Holder = Holder()
     
+    var merchant: Merchant? {
+        didSet {
+            holder.merchant = merchant
+        }
+    }
+
     let path: String
     let body: U.Type
     let formURLEncoded: Bool

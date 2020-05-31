@@ -1,6 +1,14 @@
 @propertyWrapper
-public struct HEAD: HttpMethod {
+public struct HEAD: MerchantHttpMethod {
+    let holder: Holder = Holder()
     
+    var merchant: Merchant? {
+        didSet {
+            holder.merchant = merchant
+        }
+    }
+
+
     public typealias T = Nothing
     
     var path: String

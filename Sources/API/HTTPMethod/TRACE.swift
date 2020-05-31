@@ -1,8 +1,16 @@
 import Foundation
 
 @propertyWrapper
-public struct TRACE: HttpMethod {
+public struct TRACE: MerchantHttpMethod {
+    let holder: Holder = Holder()
     
+    var merchant: Merchant? {
+        didSet {
+            holder.merchant = merchant
+        }
+    }
+
+
     public typealias T = Nothing
     
     var path: String

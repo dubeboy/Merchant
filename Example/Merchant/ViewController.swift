@@ -10,7 +10,7 @@ import UIKit
 import Merchant
 
 class ViewController: UIViewController {
-    
+
     @Autowired
     var client: HTTPService
 

@@ -1,7 +1,12 @@
 import Foundation
 import Alamofire
 
-protocol MerchantHttpMethod {
+protocol MerchantHttpMethodBase {
+    var merchant: Merchant? { get set }
+    var holder: Holder { get }
+}
+
+protocol MerchantHttpMethod: MerchantHttpMethodBase {
     
     associatedtype T: Decodable
 
@@ -13,13 +18,21 @@ protocol MerchantHttpMethod {
 
 extension MerchantHttpMethod {
     
-    private var baseURL: String { MerchantInstance.instance.baseURL }
-    private var globalQueries: [String: String]? { MerchantInstance.instance.globalQuery }
+    private var nonNilMerchant: Merchant {
+        guard let merchant = holder.merchant else {
+            preconditionFailure(.errorUnexpected)
+        }
+        return merchant
+    }
     
+    private var baseURL: String { nonNilMerchant.baseURL }
+    
+    private var globalQueries: [String: String]? { nonNilMerchant.globalQuery }
+
     var client: HTTPClient<T> {
         HTTPClient(
-            session: MerchantInstance.instance.session,
-            logger: MerchantInstance.instance.logger
+            session: nonNilMerchant.session,
+            logger: nonNilMerchant.logger
         )
     }
     
