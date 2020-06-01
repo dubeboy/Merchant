@@ -1,9 +1,5 @@
 import Foundation
 
-class Holder {
-     var merchant: Merchant?
-}
-
 @propertyWrapper
 public struct GET<T: Decodable>: MerchantHttpMethod {
     

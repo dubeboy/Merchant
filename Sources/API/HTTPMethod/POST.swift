@@ -1,7 +1,7 @@
 import Foundation
 
 @propertyWrapper
-public struct POST<T: Decodable, U: Encodable>: MerchantHttpMethod {
+public struct POST<T: Decodable, U: Encodable, Q: Query>: MerchantHttpMethod {
     let holder: Holder = Holder()
     
     var merchant: Merchant? {
@@ -12,7 +12,6 @@ public struct POST<T: Decodable, U: Encodable>: MerchantHttpMethod {
 
  
     let path: String
-    let body: U.Type
     let formURLEncoded: Bool
     let headers: [String: String]?
    
@@ -23,27 +22,30 @@ public struct POST<T: Decodable, U: Encodable>: MerchantHttpMethod {
     
     public var projectedValue: Self { self }
     
-    public init(_ path: String = "", body: U.Type, formURLEncoded: Bool = false,
+    public init(_ path: String = "",
+                query: Q.Type?,
+                body: U.Type,
+                formURLEncoded: Bool = false,
                 headers: [String: String]? = nil) {
         self.path = path
-        self.body = body
         self.formURLEncoded = formURLEncoded
         self.headers = headers
     }
     
-    func post(pathParameters: [String: String]?, queryParameters: [String: String]?, body: U?,
+    func post(pathParameters: [String: String]?, queryParameters: [Q: String]?, body: U?,
               completion: @escaping Completion<T>) {
-        let url = createURL(with: pathParameters, and: queryParameters)
+//        let url = createURL(with: pathParameters, and: queryParameters)
+        let url = ""
+
         
         client.requestWithBody(url: url, method: .post, body: body, headers: headers,
                                formURLEncoded: formURLEncoded, completion: completion)
     }
-    
 }
 
 extension POST {
     public func callAsFunction(_ path: [String: String]? = nil,
-                        query parameters: [String: String]? = nil,
+                        query parameters: [Q: String]? = nil, // this should take in a codeable
                         body: U,
                         completion: @escaping Completion<T>) {
         post(pathParameters: path, queryParameters: parameters, body: body, completion: completion)

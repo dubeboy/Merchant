@@ -18,9 +18,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        client.$get { _ in
+        client.$postIt(query: [.home: ""], body: "") { _ in
             
         }
+    }
+    
+    struct Hello {
+        let id: Int
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,3 +34,11 @@ class ViewController: UIViewController {
 
 }
 
+
+extension Sequence {
+    func map<T>(_ keyPath: KeyPath<Element, T>) -> [T] {
+        return map { e in
+            e[keyPath: keyPath]
+        }
+    }
+}

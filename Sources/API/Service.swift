@@ -19,13 +19,6 @@ extension Service {
     
     public var level: LogLevel? { nil }
     public var query: [String: String]? { nil }
-    public var session: Session? {
-        get {
-            return nil
-        }
-        set {
-           
-        }
-    }
+    public var session: Session? { nil }
 }
 
