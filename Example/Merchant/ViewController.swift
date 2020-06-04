@@ -18,9 +18,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        client.$postIt(query: [.home: ""], body: "") { _ in
+        client.$get(query: [.home: ""]) { _ in
             
         }
+        
     }
     
     struct Hello {

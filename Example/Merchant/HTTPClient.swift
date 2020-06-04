@@ -25,10 +25,15 @@ struct StatusReponse<T: Decodable> : Decodable {
 struct HTTPService: Service {
     var baseURL: String = "http://192.168.88.251:8080/groceries"
     
+    enum QQ: String, Query { case home; case estate }
+    @GET(query: QQ.self)
+    var get: Grocery
+    
+   
     @GET
     var get: Grocery
     
-    enum QQ: String, Query { case home; case estate }
+   
     @POST(query: QQ.self, body: String.self)
     var postIt: Grocery
 }
