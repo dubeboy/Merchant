@@ -1,7 +1,7 @@
 import Foundation
 
 @propertyWrapper
-public struct POST<T: Decodable, U: Encodable, Q: Query>: MerchantHttpMethod {
+public struct POST<T: Decodable, U: Encodable>: MerchantHttpMethod {
     let holder: Holder = Holder()
     
     var merchant: Merchant? {
@@ -23,7 +23,6 @@ public struct POST<T: Decodable, U: Encodable, Q: Query>: MerchantHttpMethod {
     public var projectedValue: Self { self }
     
     public init(_ path: String = "",
-                query: Q.Type?,
                 body: U.Type,
                 formURLEncoded: Bool = false,
                 headers: [String: String]? = nil) {
@@ -32,11 +31,9 @@ public struct POST<T: Decodable, U: Encodable, Q: Query>: MerchantHttpMethod {
         self.headers = headers
     }
     
-    func post(pathParameters: [String: String]?, queryParameters: [Q: String]?, body: U?,
+    func post(pathParameters: [String: String]?, queryParameters: [String: StringRepresentable?]?, body: U?,
               completion: @escaping Completion<T>) {
-//        let url = createURL(with: pathParameters, and: queryParameters)
-        let url = ""
-
+        let url = createURL(with: pathParameters, and: queryParameters)
         
         client.requestWithBody(url: url, method: .post, body: body, headers: headers,
                                formURLEncoded: formURLEncoded, completion: completion)
@@ -45,7 +42,7 @@ public struct POST<T: Decodable, U: Encodable, Q: Query>: MerchantHttpMethod {
 
 extension POST {
     public func callAsFunction(_ path: [String: String]? = nil,
-                        query parameters: [Q: String]? = nil, // this should take in a codeable
+                        query parameters: [String: StringRepresentable?]? = nil,
                         body: U,
                         completion: @escaping Completion<T>) {
         post(pathParameters: path, queryParameters: parameters, body: body, completion: completion)

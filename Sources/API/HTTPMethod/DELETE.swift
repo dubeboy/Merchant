@@ -25,7 +25,8 @@ public struct DELETE<T: Decodable>: MerchantHttpMethod {
         self.headers = headers
     }
     
-    func delete(pathParameters: [String: String]?, queryParamters: [String: String]?,
+    func delete(pathParameters: [String: StringRepresentable]?,
+                queryParamters: [String: StringRepresentable?]?,
                 completion: @escaping Completion<T>) {
         let url = createURL(with: pathParameters, and: queryParamters)
         client.request(url: url,  method: .delete,
@@ -35,8 +36,8 @@ public struct DELETE<T: Decodable>: MerchantHttpMethod {
 
 extension DELETE { // play with clause
     
-    public func callAsFunction(_ path: [String: String]? = nil,
-                               query parameters: [String: String]? = nil,
+    public func callAsFunction(_ path: [String: StringRepresentable]? = nil,
+                               query parameters: [String: StringRepresentable?]? = nil,
                                completion: @escaping Completion<T>) {
         
         delete(pathParameters: path,

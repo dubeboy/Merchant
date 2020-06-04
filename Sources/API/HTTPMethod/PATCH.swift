@@ -29,7 +29,7 @@ public struct PATCH<T: Decodable, U: Encodable>: MerchantHttpMethod {
         self.headers = headers
     }
     
-    func patch(pathParameters: [String: String]?, queryParameters: [String: String]?, body: U?,
+    func patch(pathParameters: [String: StringRepresentable]?, queryParameters: [String: StringRepresentable?]?, body: U?,
                completion: @escaping Completion<T>) {
         let url = createURL(with: pathParameters, and: queryParameters)
         client.requestWithBody(url: url, method: .patch, body: body, headers: headers, formURLEncoded: formURLEncoded,
@@ -39,7 +39,7 @@ public struct PATCH<T: Decodable, U: Encodable>: MerchantHttpMethod {
 }
 
 extension PATCH {
-    public func callAsFunction(_ path: [String: String]? = nil, query parameters: [String: String]? = nil,
+    public func callAsFunction(_ path: [String: StringRepresentable]? = nil, query parameters: [String: StringRepresentable?]? = nil,
                         body: U, completion: @escaping Completion<T>) {
         patch(pathParameters: path, queryParameters: parameters, body: body, completion: completion)
     }

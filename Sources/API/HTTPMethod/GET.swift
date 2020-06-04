@@ -26,7 +26,7 @@ public struct GET<T: Decodable>: MerchantHttpMethod {
         self.headers = headers
     }
 
-    func get(pathParameters: [String: String]? = nil, queryParamters: [String: String]? = nil,
+    func get(pathParameters: [String: StringRepresentable]? = nil, queryParamters: [String: StringRepresentable?]? = nil,
              completion: @escaping Completion<T>) {
         let url = createURL(with: pathParameters, and: queryParamters)
         client.request(url: url, method: .get, headers: headers, completion: completion)
@@ -34,8 +34,8 @@ public struct GET<T: Decodable>: MerchantHttpMethod {
 }
 
 extension GET {
-    public func callAsFunction(_ path: [String: String]? = nil,
-                               query parameters: [String: String]? = nil,
+    public func callAsFunction(_ path: [String: StringRepresentable]? = nil,
+                               query parameters: [String: StringRepresentable?]? = nil,
                                completion: @escaping Completion<T>) {
         get(pathParameters: path, queryParamters: parameters, completion: completion)
     }

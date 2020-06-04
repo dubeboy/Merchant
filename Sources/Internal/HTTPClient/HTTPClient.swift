@@ -8,7 +8,7 @@ struct HTTPClient<T: Decodable> {
     let logger: MerchantLogger
     let decoder: JSONDecoder = JSONDecoder()
     
-    func request(url: String, method: HTTPMethod,
+    func request(url: URL, method: HTTPMethod,
                  headers: [String: String]?,
                  completion: @escaping Completion<T>) {
         session.request(
@@ -20,7 +20,7 @@ struct HTTPClient<T: Decodable> {
         }
     }
     
-    func requestWithBody<U: Encodable>(url: String,
+    func requestWithBody<U: Encodable>(url: URL,
                                         method: HTTPMethod,
                                         body: U?,
                                         headers: [String: String]?,
