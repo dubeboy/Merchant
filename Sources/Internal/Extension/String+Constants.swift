@@ -6,7 +6,7 @@ extension String {
     
     static let errorNilInstance = "Nil Merchant instance. Try propertyWrapping your service struct with @Autowired"
     
-    static let errorDuplicateHeaders = "Duplicate keys in query parameter: %s and system wide query: %s"
+    static let errorDuplicateKeys = "Duplicate keys in query parameter: %s and system wide query: %s"
     
     static let errorNilResponse = "❌ Nil response"
     
