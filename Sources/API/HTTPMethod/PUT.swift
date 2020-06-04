@@ -1,7 +1,7 @@
 import Foundation
 
 @propertyWrapper
-public struct PUT<T: Decodable, U: Encodable>: MerchantHttpMethod {
+public struct PUT<T: Decodable, U: Encodable, Q: Query>: MerchantHttpMethod {
     let holder: Holder = Holder()
     
     var merchant: Merchant? {
@@ -30,7 +30,9 @@ public struct PUT<T: Decodable, U: Encodable>: MerchantHttpMethod {
         self.headers = headers
     }
     
-    private func put(pathParameters: [String: String]?, queryParameters: [String: String]?, body: U?,
+    private func put(pathParameters: [String: String]?,
+                     queryParameters: [Q: StringRepresentable?]?,
+                     body: U?,
                      completion: @escaping Completion<T>) {
         let url = createURL(with: pathParameters, and: queryParameters)
         client.requestWithBody(url: url, method: .put, body: body, headers: headers, formURLEncoded: formURLEncoded,
@@ -41,7 +43,7 @@ public struct PUT<T: Decodable, U: Encodable>: MerchantHttpMethod {
 
 extension PUT {
     public func callAsFunction(_ path: [String: String]? = nil,
-                               query parameters: [String: String]? = nil,
+                               query parameters: [Q: StringRepresentable?]? = nil,
                                body: U,
                                completion: @escaping Completion<T>) {  // allow only primitive value types here
         put(pathParameters: path, queryParameters: parameters, body: body, completion: completion)

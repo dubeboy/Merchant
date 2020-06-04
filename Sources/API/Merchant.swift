@@ -1,11 +1,12 @@
 import Alamofire
 
-class Merchant: Service {
+class Merchant {
+    
     var service: Service
     var logger: MerchantLogger // todo better name
     var session: Session
     
-    var globalQuery: [String: String]? { service.query }
+    var globalQuery: [String: StringRepresentable]? { service.query }
     var baseURL: String { service.baseURL }
     
     init(service: Service) {

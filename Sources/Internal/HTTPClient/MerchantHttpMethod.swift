@@ -25,9 +25,14 @@ extension MerchantHttpMethod {
         return merchant
     }
     
-    private var baseURL: String { nonNilMerchant.baseURL }
-    
-    private var globalQueries: [String: String]? { nonNilMerchant.globalQuery }
+    private var baseURL: String {
+        nonNilMerchant.baseURL
+    }
+
+    private var globalQueries: [String: StringRepresentable]? {
+        nonNilMerchant.globalQuery
+    }
+
 
     var client: HTTPClient<T> {
         HTTPClient(
@@ -36,12 +41,12 @@ extension MerchantHttpMethod {
         )
     }
     
-    func createURL(with pathParameters: [String: String]?,
-                   and queryParameters: [String: String]?) -> String {
+    func createURL(with pathParameters: [String: StringRepresentable]?,
+                   and queryParameters: [Q: StringRepresentable?]?) -> String {
         let injectedPath = injectPath(with: pathParameters)
         let query = appendGlobalQuery(to: queryParameters)
         var components = URLComponents(string: baseURL + injectedPath)
-        components?.queryItems = query?.map { URLQueryItem(name: $0, value: $1) }
+        components?.queryItems = query?.map { URLQueryItem(name: $0, value: $1?.stringRepresentation) }
         guard let url = components?.url else {
             preconditionFailure(
                 String(
@@ -57,11 +62,22 @@ extension MerchantHttpMethod {
 }
 
 extension MerchantHttpMethod {
-    private func injectPath(with pathParamters: [String: String]?) -> String {
-        guard let pathParameters = pathParamters else { return path }
+    private func injectPath(with pathParamters: [String: StringRepresentable]?) -> String {
+        let pathVariables = getPathVariables(for: path)
+        guard let pathParameters = pathParamters else {
+            if pathVariables.isEmpty {
+                return path
+            }
+            preconditionFailure(
+                String(
+                    format: .errorNoneMatchingPathVariables,
+                    pathVariables , "nil"
+                )
+            )
+        }
         
         var newPath = path
-        for variable in getPathVariables(for: path) {
+        for variable in pathVariables {
             guard let value = pathParameters[variable] else {
                 preconditionFailure(
                     String(
@@ -70,17 +86,19 @@ extension MerchantHttpMethod {
                     )
                 )
             }
-            newPath = newPath.replacingOccurrences(of: "{\(variable)}", with: value)
+            newPath = newPath.replacingOccurrences(of: "{\(variable)}", with: value.stringRepresentation)
         }
         return newPath
     }
         
-    private func appendGlobalQuery(to queries: [String: String]?) -> [String: String]? {
+    private func appendGlobalQuery(to queries: [String: StringRepresentable?]?) -> [String: StringRepresentable?]? {
         if let queries = queries, !queries.isEmpty {
-            return queries.merging(globalQueries ?? [:]) {
-                _,_  in preconditionFailure(
+            return Dictionary(uniqueKeysWithValues: queries.map {
+                return ($0, $1)
+            }).merging(globalQueries ?? [:]) {  _, _ in
+                preconditionFailure(
                     String(
-                        format: .errorDuplicateHeaders,
+                        format: .errorDuplicateKeys,
                         queries,
                         String(describing: globalQueries)
                     )

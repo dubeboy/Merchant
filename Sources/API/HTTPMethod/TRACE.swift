@@ -1,7 +1,7 @@
 import Foundation
 
 @propertyWrapper
-public struct TRACE: MerchantHttpMethod {
+public struct TRACE<Q: Query>: MerchantHttpMethod {
     let holder: Holder = Holder()
     
     var merchant: Merchant? {
@@ -28,7 +28,8 @@ public struct TRACE: MerchantHttpMethod {
         self.headers = headers
     }
     
-    func trace(pathParameters: [String: String]?, queryParamters: [String: String]?,
+    func trace(pathParameters: [String: String]?,
+               queryParamters: [Q: StringRepresentable?]?,
              completion: @escaping Completion<T>) {
         let url = createURL(with: pathParameters, and: queryParamters)
         client.request(url: url, method: .trace, headers: headers, completion: completion)
@@ -37,7 +38,7 @@ public struct TRACE: MerchantHttpMethod {
 
 extension TRACE {
     public func callAsFunction(_ path: [String: String]? = nil,
-                               query parameters: [String: String]? = nil,
+                               query parameters: [Q: StringRepresentable?]? = nil,
                                completion: @escaping Completion<T>) {
         trace(pathParameters: path, queryParamters: parameters, completion: completion)
     }

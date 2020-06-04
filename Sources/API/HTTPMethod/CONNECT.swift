@@ -1,7 +1,7 @@
 import Foundation
 
 @propertyWrapper
-public struct CONNECT<T: Decodable>: MerchantHttpMethod {
+public struct CONNECT<T: Decodable, Q: Query>: MerchantHttpMethod {
     let holder: Holder = Holder()
     
     var merchant: Merchant? {
@@ -25,16 +25,17 @@ public struct CONNECT<T: Decodable>: MerchantHttpMethod {
         self.headers = headers
     }
     
-    func connect(pathParameters: [String: String]?, queryParamters: [String: String]?,
+    func connect(pathParameters: [String: String]?,
+                 queryParamters: [Q: StringRepresentable?]?,
              completion: @escaping Completion<T>) {
-        let url = createURL(with: pathParameters, and: queryParamters)
-        client.request(url: url, method: .connect, headers: headers, completion: completion)
+//        let url = createURL(with: pathParameters, and: queryParamters)
+//        client.request(url: url, method: .connect, headers: headers, completion: completion)
     }
 }
 
 extension CONNECT {
     public func callAsFunction(_ path: [String: String]? = nil,
-                               query parameters: [String: String]? = nil,
+                               query parameters: [Q: StringRepresentable?]? = nil,
                                completion: @escaping Completion<T>) {
         connect(pathParameters: path, queryParamters: parameters, completion: completion)
     }

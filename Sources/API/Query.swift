@@ -5,3 +5,4 @@ public protocol Query: Decodable, Hashable, CaseIterable, RawRepresentable where
 public enum Default: String, Query {
     case void
 }
+

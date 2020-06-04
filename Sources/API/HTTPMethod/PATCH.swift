@@ -1,7 +1,7 @@
 import Foundation
 
 @propertyWrapper
-public struct PATCH<T: Decodable, U: Encodable>: MerchantHttpMethod {
+public struct PATCH<T: Decodable, U: Encodable, Q: Query>: MerchantHttpMethod {
     let holder: Holder = Holder()
     
     var merchant: Merchant? {
@@ -29,7 +29,9 @@ public struct PATCH<T: Decodable, U: Encodable>: MerchantHttpMethod {
         self.headers = headers
     }
     
-    func patch(pathParameters: [String: String]?, queryParameters: [String: String]?, body: U?,
+    func patch(pathParameters: [String: String]?,
+               queryParameters: [Q: StringRepresentable?]?,
+               body: U?,
                completion: @escaping Completion<T>) {
         let url = createURL(with: pathParameters, and: queryParameters)
         client.requestWithBody(url: url, method: .patch, body: body, headers: headers, formURLEncoded: formURLEncoded,
@@ -39,8 +41,10 @@ public struct PATCH<T: Decodable, U: Encodable>: MerchantHttpMethod {
 }
 
 extension PATCH {
-    public func callAsFunction(_ path: [String: String]? = nil, query parameters: [String: String]? = nil,
-                        body: U, completion: @escaping Completion<T>) {
+    public func callAsFunction(_ path: [String: String]? = nil,
+                               query parameters: [Q: StringRepresentable?]? = nil,
+                               body: U,
+                               completion: @escaping Completion<T>) {
         patch(pathParameters: path, queryParameters: parameters, body: body, completion: completion)
     }
 }

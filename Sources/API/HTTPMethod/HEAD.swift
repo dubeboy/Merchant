@@ -1,5 +1,5 @@
 @propertyWrapper
-public struct HEAD: MerchantHttpMethod {
+public struct HEAD<Q: Query>: MerchantHttpMethod {
     let holder: Holder = Holder()
     
     var merchant: Merchant? {
@@ -26,7 +26,8 @@ public struct HEAD: MerchantHttpMethod {
         self.headers = headers
     }
     
-    func head(pathParameters: [String: String]?, queryParamters: [String: String]?,
+    func head(pathParameters: [String: String]?,
+              queryParamters: [Q: StringRepresentable?]?,
              completion: @escaping Completion<T>) {
         let url = createURL(with: pathParameters, and: queryParamters)
         client.request(url: url, method: .head, headers: headers, completion: completion)
@@ -35,7 +36,7 @@ public struct HEAD: MerchantHttpMethod {
 
 extension HEAD {
     public func callAsFunction(_ path: [String: String]? = nil,
-                               query parameters: [String: String]? = nil,
+                               query parameters: [Q: StringRepresentable?]? = nil,
                                completion: @escaping Completion<Nothing>) {
         head(pathParameters: path, queryParamters: parameters, completion: completion)
     }

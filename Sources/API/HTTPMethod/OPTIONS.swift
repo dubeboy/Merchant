@@ -1,7 +1,8 @@
 import Foundation
 
 @propertyWrapper
-public struct OPTIONS<T: Decodable>: MerchantHttpMethod {
+public struct OPTIONS<T: Decodable, Q: Query>: MerchantHttpMethod {
+    
     let holder: Holder = Holder()
     
     var merchant: Merchant? {
@@ -25,8 +26,9 @@ public struct OPTIONS<T: Decodable>: MerchantHttpMethod {
         self.headers = headers
     }
     
-    func options(pathParameters: [String: String]?, queryParamters: [String: String]?,
-             completion: @escaping Completion<T>) {
+    func options(pathParameters: [String: String]?,
+                 queryParamters: [Q: StringRepresentable?]?,
+                 completion: @escaping Completion<T>) {
         let url = createURL(with: pathParameters, and: queryParamters)
         client.request(url: url, method: .options, headers: headers, completion: completion)
     }
@@ -34,7 +36,7 @@ public struct OPTIONS<T: Decodable>: MerchantHttpMethod {
 
 extension OPTIONS {
     public func callAsFunction(_ path: [String: String]? = nil,
-                               query parameters: [String: String]? = nil,
+                               query parameters: [Q: StringRepresentable?]? = nil,
                                completion: @escaping Completion<T>) {
         options(pathParameters: path, queryParamters: parameters, completion: completion)
     }

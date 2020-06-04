@@ -1,7 +1,7 @@
 import Foundation
 
 @propertyWrapper
-public struct DELETE<T: Decodable>: MerchantHttpMethod {
+public struct DELETE<T: Decodable, Q: Query>: MerchantHttpMethod {
     let holder: Holder = Holder()
     
     var merchant: Merchant? {
@@ -25,7 +25,8 @@ public struct DELETE<T: Decodable>: MerchantHttpMethod {
         self.headers = headers
     }
     
-    func delete(pathParameters: [String: String]?, queryParamters: [String: String]?,
+    func delete(pathParameters: [String: String]?,
+                queryParamters: [Q: StringRepresentable?]?,
                 completion: @escaping Completion<T>) {
         let url = createURL(with: pathParameters, and: queryParamters)
         client.request(url: url,  method: .delete,
@@ -36,7 +37,7 @@ public struct DELETE<T: Decodable>: MerchantHttpMethod {
 extension DELETE { // play with clause
     
     public func callAsFunction(_ path: [String: String]? = nil,
-                               query parameters: [String: String]? = nil,
+                               query parameters: [Q: StringRepresentable?]? = nil,
                                completion: @escaping Completion<T>) {
         
         delete(pathParameters: path,
