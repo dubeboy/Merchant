@@ -8,7 +8,6 @@
 
 import Merchant
 
-
 struct Grocery: Codable {
     let name: String
     var id: Int?
@@ -23,10 +22,10 @@ struct StatusReponse<T: Decodable> : Decodable {
 
 
 struct HTTPService: Service {
-    var baseURL: String = "http://192.168.88.251:8080/groceries"
+    var baseURL: String = "https://httpbin.org/image"
     
-    @GET
-    var get: Grocery
+    @GET(headers: ["accept": "image/webp"])
+    var get: Data
     
     @POST(body: String.self)
     var postIt: Grocery
