@@ -25,6 +25,28 @@ Merchant is a type-safe HTTP client for iOS, iPadOS, macOS, watchOS and tvOS. In
 
 it allows you to simply "property wrap" any codable Swift struct and Merchant will do all the heavy lifting of initiating the HTTP request and decoding the HTTP response data into your model all in a type safe and declarative way.
 
+# Experimental
+
+I wanted to achieve something like this below so that we have type safe keys 
+
+### Client 
+```swift
+ struct ApplicationClient {
+     
+    enum QueryKeys: Query { case key; case id; ... } // these are the HTTP query keys
+    @GET("/weather", query: QueryKeys.self )
+    var getWeather: Weather
+    
+}
+```
+
+### class site
+
+```swift
+...
+ client.$getWeather(query: [.key: "API_KEY0x1112", .id: "23"]) { ... } 
+```
+
 # Installation
 
 ### CocoaPods
