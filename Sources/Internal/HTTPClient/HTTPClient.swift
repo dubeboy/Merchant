@@ -8,7 +8,8 @@ struct HTTPClient<T: Decodable> {
     let logger: MerchantLogger
     let decoder: JSONDecoder = JSONDecoder()
     
-    func request(url: URL, method: HTTPMethod,
+    func request(url: URL,
+                 method: HTTPMethod,
                  headers: [String: String]?,
                  completion: @escaping Completion<T>) {
         session.request(
@@ -19,33 +20,50 @@ struct HTTPClient<T: Decodable> {
             self.processResponse(response, completion: completion)
         }
     }
-    
+ 
     func requestWithBody<U: Encodable>(url: URL,
-                                        method: HTTPMethod,
-                                        body: U?,
-                                        headers: [String: String]?,
-                                        formURLEncoded: Bool,
-                                        completion: @escaping Completion<T>) {
+                                       method: HTTPMethod,
+                                       body: U?,
+                                       headers: [String: String]?,
+                                       formURLEncoded: Bool,
+                                       completion: @escaping Completion<T>) {
+        request(
+            url: url,
+            method: method,
+            body: body,
+            headers: headers,
+            formURLEncoded: formURLEncoded
+        ).responseDecodable(of: T.self,
+                            decoder: decoder) { response in
+                                self.processResponse(response, completion: completion)
+        }
+    }
+    
+    private func request<U: Encodable>(url: URL,
+                               method: HTTPMethod,
+                               body: U?,
+                               headers: [String: String]?,
+                               formURLEncoded: Bool) -> DataRequest {
+        
         var encoder: ParameterEncoder = JSONParameterEncoder.default
-        if (formURLEncoded) {
+        if formURLEncoded {
             encoder = URLEncodedFormParameterEncoder.default
         }
         
-        session.request(
-            url, method: method,
+       return session.request(
+            url,
+            method: method,
             parameters: body,
             encoder: encoder,
             headers: HTTPHeaders(headers ?? [:])
-        ).responseDecodable(of: T.self, decoder: decoder) { response in
-            self.processResponse(response, completion: completion)
-        }
+        )
     }
     
     private func processResponse(_ response: AFDataResponse<T>,
                                  completion: @escaping Completion<T>) {
-      
+
         self.logger.log(response.response, data: response.data, metrics: response.metrics)
-        
+
         guard let urlResponse = response.response else {
             return completion(
                 .failure(
@@ -53,7 +71,7 @@ struct HTTPClient<T: Decodable> {
                 )
             )
         }
-        
+
         switch response.result {
             case .success(let model):
                 return completion(

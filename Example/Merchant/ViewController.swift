@@ -55,12 +55,3 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     }
 
 }
-
-
-extension Sequence {
-    func map<T>(_ keyPath: KeyPath<Element, T>) -> [T] {
-        return map { e in
-            e[keyPath: keyPath]
-        }
-    }
-}
