@@ -12,7 +12,7 @@ protocol MerchantHttpMethod: MerchantHttpMethodBase {
 
     var path: String { get }
     var headers: [String: String]? { get }
-    var client: HTTPClient<T> { get }
+    var client: HTTPClient { get }
 
 }
 
@@ -26,14 +26,10 @@ extension MerchantHttpMethod {
     }
     
     private var baseURL: String { nonNilMerchant.baseURL }
-    
     private var globalQueries: [String: StringRepresentable]? { nonNilMerchant.globalQuery }
 
-    var client: HTTPClient<T> {
-        HTTPClient(
-            session: nonNilMerchant.session,
-            logger: nonNilMerchant.logger
-        )
+    var client: HTTPClient {
+        nonNilMerchant.client
     }
     
     func createURL(with pathParameters: [String: StringRepresentable]?,

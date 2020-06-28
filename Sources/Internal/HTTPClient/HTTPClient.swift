@@ -3,25 +3,31 @@ import Alamofire
 
 public typealias Completion<T: Decodable> = (_ result: Result<ResponseObject<T>, Error>) -> Void
 
-struct HTTPClient<T: Decodable> {
+struct HTTPClient {
     let session: Session
     let logger: MerchantLogger
     let decoder: JSONDecoder = JSONDecoder()
     
-    func request(url: URL,
+    func request<T: Decodable>(url: URL,
                  method: HTTPMethod,
                  headers: [String: String]?,
                  completion: @escaping Completion<T>) {
-        session.request(
+        
+        let dataRequest = session.request(
             url,
             method: method,
             headers: HTTPHeaders(headers ?? [:])
-        ).responseDecodable(of: T.self, decoder: decoder) { response in
-            self.processResponse(response, completion: completion)
+        )
+        
+        switch T.self {
+            case is Data.Type:
+                responseDecodeData(dataRequest: dataRequest, completion: completion as! Completion<Data>)
+            default:
+               responseDecodeJSONData(dataRequest: dataRequest, completion: completion)
         }
     }
- 
-    func requestWithBody<U: Encodable>(url: URL,
+
+    func requestWithBody<T: Decodable, U: Encodable>(url: URL,
                                        method: HTTPMethod,
                                        body: U?,
                                        headers: [String: String]?,
@@ -59,7 +65,7 @@ struct HTTPClient<T: Decodable> {
         )
     }
     
-    private func processResponse(_ response: AFDataResponse<T>,
+    private func processResponse<T: Decodable>(_ response: AFDataResponse<T>,
                                  completion: @escaping Completion<T>) {
 
         self.logger.log(response.response, data: response.data, metrics: response.metrics)
@@ -85,6 +91,18 @@ struct HTTPClient<T: Decodable> {
                 )
             case .failure(let error):
                 return completion(.failure(error))
+        }
+    }
+    
+    private func responseDecodeJSONData<T: Decodable>(dataRequest: DataRequest, completion: @escaping Completion<T>) {
+        dataRequest.responseDecodable(of: T.self, decoder: decoder) { response in
+            self.processResponse(response, completion: completion)
+        }
+    }
+    
+    private func responseDecodeData(dataRequest: DataRequest, completion: @escaping Completion<Data>) {
+        dataRequest.responseData { response in
+            self.processResponse(response, completion: completion)
         }
     }
 }

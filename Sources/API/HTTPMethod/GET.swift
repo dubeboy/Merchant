@@ -31,6 +31,14 @@ public struct GET<T: Decodable>: MerchantHttpMethod {
         let url = createURL(with: pathParameters, and: queryParamters)
         client.request(url: url, method: .get, headers: headers, completion: completion)
     }
+    
+    private func getDataDecodable(
+        pathParameters: [String: StringRepresentable]? = nil, queryParamters: [String:
+        StringRepresentable?]? = nil,
+        completion: @escaping Completion<Data>
+    ) {
+        
+    }
 }
 
 extension GET {
@@ -40,14 +48,14 @@ extension GET {
         get(pathParameters: path, queryParamters: parameters, completion: completion)
     }
 }
-
-extension GET where T == Data {
-    public func callAsFunction(_ path: [String: StringRepresentable]? = nil,
-                               query parameters: [String: StringRepresentable?]? = nil,
-                               completion: @escaping Completion<T>) {
-       get(pathParameters: path, queryParamters: parameters, completion: completion)
-    }
-}
+//
+//extension GET where T == Data {
+//    public func callAsFunction(_ path: [String: StringRepresentable]? = nil,
+//                               query parameters: [String: StringRepresentable?]? = nil,
+//                               completion: @escaping Completion<T>) {
+//       get(pathParameters: path, queryParamters: parameters, completion: completion)
+//    }
+//}
 
 
 
