@@ -9,6 +9,7 @@ public protocol Service {
     var baseURL: String { get }
     
     init()
+
 }
 
 extension Service {

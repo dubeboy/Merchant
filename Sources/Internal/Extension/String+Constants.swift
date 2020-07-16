@@ -4,7 +4,7 @@ extension String {
     static let errorMethodGet = "You cannot get this value"
     static let errorMethodSet = "You cannot set this value"
     
-    static let errorNilInstance = "Nil Merchant instance. Try propertyWrapping your service struct with @Autowired"
+    static let errorNilInstance = "Nil Merchant instance. Try propertyWrapping your service struct/class with @Autowired"
     
     static let errorDuplicateKeys = "Duplicate keys in query parameter: %s and system wide query: %s"
     

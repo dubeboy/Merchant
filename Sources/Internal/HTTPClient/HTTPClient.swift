@@ -4,14 +4,19 @@ import Alamofire
 public typealias Completion<T: Decodable> = (_ result: Result<ResponseObject<T>, Error>) -> Void
 
 struct HTTPClient {
+    init(session: Session, logger: MerchantLogger) {
+        self.session = session
+        self.logger = logger
+    }
+    
     let session: Session
     let logger: MerchantLogger
     let decoder: JSONDecoder = JSONDecoder()
     
     func request<T: Decodable>(url: URL,
-                 method: HTTPMethod,
-                 headers: [String: String]?,
-                 completion: @escaping Completion<T>) {
+                               method: HTTPMethod,
+                               headers: [String: String]?,
+                               completion: @escaping Completion<T>) {
         
         let dataRequest = session.request(
             url,
@@ -23,17 +28,17 @@ struct HTTPClient {
             case is Data.Type:
                 responseDecodeData(dataRequest: dataRequest, completion: completion as! Completion<Data>)
             default:
-               responseDecodeJSONData(dataRequest: dataRequest, completion: completion)
+                responseDecodeJSON(dataRequest: dataRequest, completion: completion)
         }
     }
-
+    
     func requestWithBody<T: Decodable, U: Encodable>(url: URL,
-                                       method: HTTPMethod,
-                                       body: U?,
-                                       headers: [String: String]?,
-                                       formURLEncoded: Bool,
-                                       completion: @escaping Completion<T>) {
-        request(
+                                                     method: HTTPMethod,
+                                                     body: U?,
+                                                     headers: [String: String]?,
+                                                     formURLEncoded: Bool,
+                                                     completion: @escaping Completion<T>) {
+        let dataRequest = request(
             url: url,
             method: method,
             body: body,
@@ -46,30 +51,29 @@ struct HTTPClient {
     }
     
     private func request<U: Encodable>(url: URL,
-                               method: HTTPMethod,
-                               body: U?,
-                               headers: [String: String]?,
-                               formURLEncoded: Bool) -> DataRequest {
+                                       method: HTTPMethod,
+                                       body: U?,
+                                       headers: [String: String]?,
+                                       formURLEncoded: Bool) -> DataRequest {
         
         var encoder: ParameterEncoder = JSONParameterEncoder.default
         if formURLEncoded {
             encoder = URLEncodedFormParameterEncoder.default
         }
         
-       return session.request(
+        return session.request(
             url,
             method: method,
             parameters: body,
-            encoder: encoder,
+//            encoder: encoder,
             headers: HTTPHeaders(headers ?? [:])
         )
     }
     
     private func processResponse<T: Decodable>(_ response: AFDataResponse<T>,
-                                 completion: @escaping Completion<T>) {
-
-        self.logger.log(response.response, data: response.data, metrics: response.metrics)
-
+                                               completion: @escaping Completion<T>) {
+        logger.log(response.response, data: response.data, metrics: response.metrics)
+        
         guard let urlResponse = response.response else {
             return completion(
                 .failure(
@@ -77,7 +81,7 @@ struct HTTPClient {
                 )
             )
         }
-
+        
         switch response.result {
             case .success(let model):
                 return completion(
@@ -101,8 +105,12 @@ struct HTTPClient {
     }
     
     private func responseDecodeData(dataRequest: DataRequest, completion: @escaping Completion<Data>) {
-        dataRequest.responseData { response in
-            self.processResponse(response, completion: completion)
+//        dataRequest.responseData { response in
+//            self.processResponse(response, completion: completion)
+//        }
+        
+        dataRequest.response { response in
+            print(response)
         }
     }
 }

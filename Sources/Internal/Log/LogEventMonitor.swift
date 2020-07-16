@@ -2,7 +2,6 @@ import Alamofire
 
 class LogEventMonitor: EventMonitor {
 
-    var queue: DispatchQueue = DispatchQueue.loggingQueue
     var logger: MerchantLogger
     
     init(logger: MerchantLogger) {

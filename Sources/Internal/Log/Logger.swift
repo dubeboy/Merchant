@@ -14,7 +14,6 @@ struct MerchantLogger: Logger {
     private let formater = DateFormatter()
     private let loggerOutput: LoggerOutput = STDOutLogger.instance
 
-    
     init(level: LogLevel) {
         formater.dateFormat = "yy-MM-dd HH:mm:ss.SSS"
         self.level = level

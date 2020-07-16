@@ -9,7 +9,7 @@
 import UIKit
 import Merchant
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate {
 
     @Autowired
     var client: HTTPService
@@ -18,15 +18,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        imageView.backgroundColor = .brown
+//        client.$get { response in
+//            switch response {
+//                case .success(let success):
+//                    let data = success.body
+//                    print(data)
+//                    let uiImage = UIImage(data: data)
+//                    self.imageView.image = uiImage
+//                    
+//                case .failure(let e):
+//                    print(e)
+//            }
+//        }
         
-        client.$get { response in
-            switch response {
-                case .success(let success):
-                    print(success.body)
-                case .failure(let e):
-                    print(e)
-            }
-        }
+        
     }
     
     @IBAction func viewGallery(_ sender: Any) {
@@ -48,10 +54,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        let imageData = image?.pngData()
         //Or you can get the image url from AssetsLibrary
-        
-        imageView.image = image
+        client.$postImageData(body: imageData!) { response in
+            switch response {
+                case .success(let success):
+                    print("success")
+                    let data = success.body
+//                    print(data)
+                    let uiImage = UIImage(data: data)
+                    self.imageView.image = uiImage
+                case .failure(let e):
+                     print("fail")
+                     print(e)
+            }
+        }
+//        imageView.image = image
         picker.dismiss(animated: true, completion: nil)
     }
-
 }
