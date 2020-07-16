@@ -3,66 +3,106 @@ import Alamofire
 
 public typealias Completion<T: Decodable> = (_ result: Result<ResponseObject<T>, Error>) -> Void
 
-struct HTTPClient<T: Decodable> {
-    
-    let logger: Logger = Merchant.logger
-    let decoder: JSONDecoder = JSONDecoder()
-    let requestInterceptor: HTTPRequestInterceptor
+struct HTTPClient {
     let session: Session
+    let logger: MerchantLogger
+    let decoder: JSONDecoder = JSONDecoder()
     
-    func request(url: String, method: HTTPMethod,
+    func request<T: Decodable>(url: URL,
+                 method: HTTPMethod,
                  headers: [String: String]?,
                  completion: @escaping Completion<T>) {
         
-        session.request(url,
-                        method: method,
-                        headers: HTTPHeaders(headers ?? [:]),
-                        interceptor: requestInterceptor)
-            .responseDecodable(of: T.self, decoder: decoder) { response in
-                
-                self.processResponse(response, completion: completion)
-                
+        let dataRequest = session.request(
+            url,
+            method: method,
+            headers: HTTPHeaders(headers ?? [:])
+        )
+        
+        switch T.self {
+            case is Data.Type:
+                responseDecodeData(dataRequest: dataRequest, completion: completion as! Completion<Data>)
+            default:
+               responseDecodeJSONData(dataRequest: dataRequest, completion: completion)
+        }
+    }
+
+    func requestWithBody<T: Decodable, U: Encodable>(url: URL,
+                                       method: HTTPMethod,
+                                       body: U?,
+                                       headers: [String: String]?,
+                                       formURLEncoded: Bool,
+                                       completion: @escaping Completion<T>) {
+        request(
+            url: url,
+            method: method,
+            body: body,
+            headers: headers,
+            formURLEncoded: formURLEncoded
+        ).responseDecodable(of: T.self,
+                            decoder: decoder) { response in
+                                self.processResponse(response, completion: completion)
         }
     }
     
-    func requestWithBody<U: Encodable>(url: String,
-                                        method: HTTPMethod,
-                                        body: U?,
-                                        headers: [String: String]?,
-                                        formURLEncoded: Bool,
-                                        completion: @escaping Completion<T>) {
+    private func request<U: Encodable>(url: URL,
+                               method: HTTPMethod,
+                               body: U?,
+                               headers: [String: String]?,
+                               formURLEncoded: Bool) -> DataRequest {
         
         var encoder: ParameterEncoder = JSONParameterEncoder.default
-        
-        if (formURLEncoded) {
+        if formURLEncoded {
             encoder = URLEncodedFormParameterEncoder.default
         }
         
-        session.request(url, method: method,
-                        parameters: body,
-                        encoder: encoder,
-                        headers: HTTPHeaders(headers ?? [:]),
-                        interceptor: requestInterceptor)
-            .responseDecodable(of: T.self, decoder: decoder) { response in
-                
-                self.processResponse(response, completion: completion)
-        }
+       return session.request(
+            url,
+            method: method,
+            parameters: body,
+            encoder: encoder,
+            headers: HTTPHeaders(headers ?? [:])
+        )
     }
     
-    private func processResponse(_ response: AFDataResponse<T>,
+    private func processResponse<T: Decodable>(_ response: AFDataResponse<T>,
                                  completion: @escaping Completion<T>) {
-        
-        self.logger.log(response.response, data: response.data, metrics: response.metrics) // USE events
-        
-        guard let urlResponse = response.response else { return completion(.failure(RetroSwiftError.error(localizedDescription: "HTTPURLResponse is nil"))) }
-        
+
+        self.logger.log(response.response, data: response.data, metrics: response.metrics)
+
+        guard let urlResponse = response.response else {
+            return completion(
+                .failure(
+                    MerchantError.error(localizedDescription: .errorNilInstance)
+                )
+            )
+        }
+
         switch response.result {
             case .success(let model):
                 return completion(
-                    .success(ResponseObject(body: model, statusCode: urlResponse.statusCode, raw: response))
-            )
+                    .success(
+                        ResponseObject(
+                            body: model,
+                            statusCode: urlResponse.statusCode,
+                            raw: response
+                        )
+                    )
+                )
             case .failure(let error):
                 return completion(.failure(error))
+        }
+    }
+    
+    private func responseDecodeJSONData<T: Decodable>(dataRequest: DataRequest, completion: @escaping Completion<T>) {
+        dataRequest.responseDecodable(of: T.self, decoder: decoder) { response in
+            self.processResponse(response, completion: completion)
+        }
+    }
+    
+    private func responseDecodeData(dataRequest: DataRequest, completion: @escaping Completion<Data>) {
+        dataRequest.responseData { response in
+            self.processResponse(response, completion: completion)
         }
     }
 }

@@ -1,14 +1,21 @@
 import Foundation
 
 @propertyWrapper
-public struct DELETE<T: Decodable>: HttpRequestMethod {
+public struct DELETE<T: Decodable>: MerchantHttpMethod {
+    let holder: Holder = Holder()
     
+    var merchant: Merchant? {
+        didSet {
+            holder.merchant = merchant
+        }
+    }
+
     var path: String
     var headers: [String: String]?
     
     public var wrappedValue: T {
-        get { preconditionFailure(.HTTP_METHOD_CANNOT_GET) }
-        set { preconditionFailure(.HTTP_METHOD_CANNOT_SET) }
+        get { preconditionFailure(.errorMethodGet) }
+        set { preconditionFailure(.errorMethodSet) }
     }
     
     public var projectedValue: Self { self }
@@ -18,7 +25,8 @@ public struct DELETE<T: Decodable>: HttpRequestMethod {
         self.headers = headers
     }
     
-    func delete(pathParameters: [String: String]?, queryParamters: [String: String]?,
+    func delete(pathParameters: [String: StringRepresentable]?,
+                queryParamters: [String: StringRepresentable?]?,
                 completion: @escaping Completion<T>) {
         let url = createURL(with: pathParameters, and: queryParamters)
         client.request(url: url,  method: .delete,
@@ -28,8 +36,8 @@ public struct DELETE<T: Decodable>: HttpRequestMethod {
 
 extension DELETE { // play with clause
     
-    public func callAsFunction(_ path: [String: String]? = nil,
-                               query parameters: [String: String]? = nil,
+    public func callAsFunction(_ path: [String: StringRepresentable]? = nil,
+                               query parameters: [String: StringRepresentable?]? = nil,
                                completion: @escaping Completion<T>) {
         
         delete(pathParameters: path,

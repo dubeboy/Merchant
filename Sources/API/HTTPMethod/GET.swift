@@ -1,14 +1,22 @@
 import Foundation
 
 @propertyWrapper
-public struct GET<T: Decodable>: HttpRequestMethod {
+public struct GET<T: Decodable>: MerchantHttpMethod {
     
+    let holder: Holder = Holder()
+    
+    var merchant: Merchant? {
+        didSet {
+            holder.merchant = merchant
+        }
+    }
+
     var path: String
     var headers: [String: String]?
     
     public var wrappedValue: T {
-        get { preconditionFailure(.HTTP_METHOD_CANNOT_GET) }
-        set { preconditionFailure(.HTTP_METHOD_CANNOT_SET) }
+        get { preconditionFailure(.errorMethodGet) }
+        set { preconditionFailure(.errorMethodSet) }
     }
     
     public var projectedValue: Self { self }
@@ -18,17 +26,36 @@ public struct GET<T: Decodable>: HttpRequestMethod {
         self.headers = headers
     }
 
-    func get(pathParameters: [String: String]?, queryParamters: [String: String]?,
+    func get(pathParameters: [String: StringRepresentable]? = nil, queryParamters: [String: StringRepresentable?]? = nil,
              completion: @escaping Completion<T>) {
         let url = createURL(with: pathParameters, and: queryParamters)
         client.request(url: url, method: .get, headers: headers, completion: completion)
     }
+    
+    private func getDataDecodable(
+        pathParameters: [String: StringRepresentable]? = nil, queryParamters: [String:
+        StringRepresentable?]? = nil,
+        completion: @escaping Completion<Data>
+    ) {
+        
+    }
 }
 
 extension GET {
-    public func callAsFunction(_ path: [String: String]? = nil,
-                               query parameters: [String: String]? = nil,
+    public func callAsFunction(_ path: [String: StringRepresentable]? = nil,
+                               query parameters: [String: StringRepresentable?]? = nil,
                                completion: @escaping Completion<T>) {
         get(pathParameters: path, queryParamters: parameters, completion: completion)
     }
 }
+//
+//extension GET where T == Data {
+//    public func callAsFunction(_ path: [String: StringRepresentable]? = nil,
+//                               query parameters: [String: StringRepresentable?]? = nil,
+//                               completion: @escaping Completion<T>) {
+//       get(pathParameters: path, queryParamters: parameters, completion: completion)
+//    }
+//}
+
+
+

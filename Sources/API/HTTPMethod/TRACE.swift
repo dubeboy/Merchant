@@ -1,16 +1,24 @@
 import Foundation
 
 @propertyWrapper
-public struct TRACE: HttpRequestMethod {
+public struct TRACE: MerchantHttpMethod {
+    let holder: Holder = Holder()
     
+    var merchant: Merchant? {
+        didSet {
+            holder.merchant = merchant
+        }
+    }
+
+
     public typealias T = Nothing
     
     var path: String
     var headers: [String: String]? = nil
     
     public var wrappedValue: T {
-        get { preconditionFailure(.HTTP_METHOD_CANNOT_GET) }
-        set { preconditionFailure(.HTTP_METHOD_CANNOT_SET) }
+        get { preconditionFailure(.errorMethodGet) }
+        set { preconditionFailure(.errorMethodSet) }
     }
     
     public var projectedValue: Self { self }

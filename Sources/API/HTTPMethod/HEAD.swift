@@ -1,14 +1,22 @@
 @propertyWrapper
-public struct HEAD: HttpRequestMethod {
+public struct HEAD: MerchantHttpMethod {
+    let holder: Holder = Holder()
     
+    var merchant: Merchant? {
+        didSet {
+            holder.merchant = merchant
+        }
+    }
+
+
     public typealias T = Nothing
     
     var path: String
     var headers: [String: String]?
     
     public var wrappedValue: T {
-        get { preconditionFailure(.HTTP_METHOD_CANNOT_GET) }
-        set { preconditionFailure(.HTTP_METHOD_CANNOT_SET) }
+        get { preconditionFailure(.errorMethodGet) }
+        set { preconditionFailure(.errorMethodSet) }
     }
     
     public var projectedValue: Self { self }
@@ -18,7 +26,7 @@ public struct HEAD: HttpRequestMethod {
         self.headers = headers
     }
     
-    func head(pathParameters: [String: String]?, queryParamters: [String: String]?,
+    func head(pathParameters: [String: StringRepresentable]?, queryParamters: [String: StringRepresentable?]?,
              completion: @escaping Completion<T>) {
         let url = createURL(with: pathParameters, and: queryParamters)
         client.request(url: url, method: .head, headers: headers, completion: completion)
@@ -26,8 +34,8 @@ public struct HEAD: HttpRequestMethod {
 }
 
 extension HEAD {
-    public func callAsFunction(_ path: [String: String]? = nil,
-                               query parameters: [String: String]? = nil,
+    public func callAsFunction(_ path: [String: StringRepresentable]? = nil,
+                               query parameters: [String: StringRepresentable?]? = nil,
                                completion: @escaping Completion<Nothing>) {
         head(pathParameters: path, queryParamters: parameters, completion: completion)
     }

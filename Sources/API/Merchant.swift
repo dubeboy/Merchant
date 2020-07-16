@@ -1,75 +1,76 @@
 import Alamofire
 
-public class Merchant {
-   
-    private static var _builder: Builder?
+class Merchant: Service {
+    var service: Service
+    var logger: MerchantLogger // todo better name
+    var session: Session
     
-    static var builder: Builder {
-        guard let builder = Merchant._builder else {
-            preconditionFailure("RetroSwift builder is nil")
-        }
-        return builder
+    var globalQuery: [String: StringRepresentable]? { service.query }
+    var baseURL: String { service.baseURL }
+    var client: HTTPClient
+    
+    init(service: Service) {
+        self.service = service
+        logger = MerchantLogger(level: service.level ?? .body)
+        session = Merchant.create(with: service)
+        client = HTTPClient(session: session, logger: logger) // TODO: - Can be better
+        setMerchant(to: service)
     }
     
-    static var baseUrl: String {
-        guard let baseUrl = builder.baseUrl, !baseUrl.isEmpty else {
-            preconditionFailure("Base URL is nil")
+    // Create a new Alamofire from the session given by the developer
+    private static func create(with service: Service) -> Session {
+        if let session = service.session {
+            return Session(
+                session: session.session,
+                delegate: session.delegate,
+                rootQueue: session.rootQueue,
+                startRequestsImmediately: session.startImmediately,
+                requestQueue: session.requestQueue,
+                serializationQueue: session.serializationQueue,
+                interceptor: session.interceptor,
+                serverTrustManager: session.serverTrustManager,
+                redirectHandler: session.redirectHandler,
+                cachedResponseHandler: session.cachedResponseHandler,
+                eventMonitors: [session.eventMonitor,
+                                createEventMonitor(level: service.level)]
+            )
         }
-        return baseUrl
+        return Session(eventMonitors: [createEventMonitor(level: service.level)])
     }
     
-    static var logger: Logger { builder.logger ?? MerchantLogger(level: .body) }
-    static var session: Session { builder.session ?? AF }
-    static var globalQuery: [String: String]? { builder.query }
-    static var logInterceptor: HTTPRequestInterceptor { HTTPRequestInterceptor(logger: Merchant.logger) }
-        
-    @discardableResult
-    public init(builder: Builder) {
-        Merchant._builder = builder
+    private static func createEventMonitor(level: LogLevel?) -> LogEventMonitor {
+        LogEventMonitor(logger: createLogger(level: level))
     }
     
-    public class Builder {
-        
-        private(set) var baseUrl: String?
-        private(set) var logger: MerchantLogger?
-        private(set) var query: [String: String]?
-        private(set) var session: Session?
-        
-        public init() { }
-     
-        @discardableResult
-        public func baseUrl(_ url: String) -> Self {
-            self.baseUrl = url
-            return self
-        }
-        
-        @discardableResult
-        public func logger(_ logger: MerchantLogger) -> Self {
-            self.logger = logger
-            return self
-        }
-         
-        @discardableResult
-        public func session(_ session: Session) -> Self {
-            self.session = session
-            return self
-        }
-                
-        @discardableResult
-        public func query(_ query: [String: String]) -> Self {
-            self.query = query
-            return self
-        }
-
-        public func build() -> Builder {
-            let builder = Builder()
-            builder.baseUrl = baseUrl
-            builder.logger = logger
-            builder.session = session
-            builder.query = query
-            return builder
+    private static func createLogger(level: LogLevel?) -> MerchantLogger {
+        MerchantLogger(level: level ?? .body)
+    }
+    
+    private func setMerchant(to service: Service) {
+        let mirror = Mirror(reflecting: service)
+        for child in mirror.children {
+            if var method = child.value as? MerchantHttpMethodBase {
+                method.merchant = self
+            }
         }
     }
 }
 
-
+@propertyWrapper
+public struct Autowired<T: Service> {
+    
+    var merchant: Merchant
+    var service: T
+    
+    public var wrappedValue: T {
+        return service
+    }
+    
+    public init(service: Service = T()) {
+        self.merchant = Merchant(service: service)
+        guard let service = merchant.service as? T else {
+            preconditionFailure(.errorUnexpected)
+        }
+        self.service = service
+    }
+}

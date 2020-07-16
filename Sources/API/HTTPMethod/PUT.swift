@@ -1,16 +1,24 @@
 import Foundation
 
 @propertyWrapper
-public struct PUT<T: Decodable, U: Encodable>: HttpRequestMethod {
+public struct PUT<T: Decodable, U: Encodable>: MerchantHttpMethod {
+    let holder: Holder = Holder()
     
+    var merchant: Merchant? {
+        didSet {
+            holder.merchant = merchant
+        }
+    }
+
+      
     let path: String
     let body: U.Type
     let formURLEncoded: Bool
     let headers: [String: String]?
     
     public var wrappedValue: T {
-        get { preconditionFailure(.HTTP_METHOD_CANNOT_GET) }
-        set { preconditionFailure(.HTTP_METHOD_CANNOT_SET) }
+        get { preconditionFailure(.errorMethodGet) }
+        set { preconditionFailure(.errorMethodSet) }
     }
     
     public var projectedValue: Self { self }

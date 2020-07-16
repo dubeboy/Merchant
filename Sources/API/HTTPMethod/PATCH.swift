@@ -1,16 +1,23 @@
 import Foundation
 
 @propertyWrapper
-public struct PATCH<T: Decodable, U: Encodable>: HttpRequestMethod {
+public struct PATCH<T: Decodable, U: Encodable>: MerchantHttpMethod {
+    let holder: Holder = Holder()
     
+    var merchant: Merchant? {
+        didSet {
+            holder.merchant = merchant
+        }
+    }
+
     let path: String
     let body: U.Type
     let formURLEncoded: Bool
     let headers: [String: String]?
     
     public var wrappedValue: T {
-        get { preconditionFailure(.HTTP_METHOD_CANNOT_GET) }
-        set { preconditionFailure(.HTTP_METHOD_CANNOT_SET) }
+        get { preconditionFailure(.errorMethodGet) }
+        set { preconditionFailure(.errorMethodSet) }
     }
     
     public var projectedValue: Self { self }
@@ -22,7 +29,7 @@ public struct PATCH<T: Decodable, U: Encodable>: HttpRequestMethod {
         self.headers = headers
     }
     
-    func patch(pathParameters: [String: String]?, queryParameters: [String: String]?, body: U?,
+    func patch(pathParameters: [String: StringRepresentable]?, queryParameters: [String: StringRepresentable?]?, body: U?,
                completion: @escaping Completion<T>) {
         let url = createURL(with: pathParameters, and: queryParameters)
         client.requestWithBody(url: url, method: .patch, body: body, headers: headers, formURLEncoded: formURLEncoded,
@@ -32,7 +39,7 @@ public struct PATCH<T: Decodable, U: Encodable>: HttpRequestMethod {
 }
 
 extension PATCH {
-    public func callAsFunction(_ path: [String: String]? = nil, query parameters: [String: String]? = nil,
+    public func callAsFunction(_ path: [String: StringRepresentable]? = nil, query parameters: [String: StringRepresentable?]? = nil,
                         body: U, completion: @escaping Completion<T>) {
         patch(pathParameters: path, queryParameters: parameters, body: body, completion: completion)
     }

@@ -1,14 +1,21 @@
 import Foundation
 
 @propertyWrapper
-public struct OPTIONS<T: Decodable>: HttpRequestMethod {
+public struct OPTIONS<T: Decodable>: MerchantHttpMethod {
+    let holder: Holder = Holder()
+    
+    var merchant: Merchant? {
+        didSet {
+            holder.merchant = merchant
+        }
+    }
     
     var path: String
     var headers: [String: String]?
     
     public var wrappedValue: T {
-        get { preconditionFailure(.HTTP_METHOD_CANNOT_GET) }
-        set { preconditionFailure(.HTTP_METHOD_CANNOT_SET) }
+        get { preconditionFailure(.errorMethodGet) }
+        set { preconditionFailure(.errorMethodSet) }
     }
     
     public var projectedValue: Self { self }
@@ -18,7 +25,8 @@ public struct OPTIONS<T: Decodable>: HttpRequestMethod {
         self.headers = headers
     }
     
-    func options(pathParameters: [String: String]?, queryParamters: [String: String]?,
+    func options(pathParameters: [String: StringRepresentable]?,
+                 queryParamters: [String: StringRepresentable?]?,
              completion: @escaping Completion<T>) {
         let url = createURL(with: pathParameters, and: queryParamters)
         client.request(url: url, method: .options, headers: headers, completion: completion)
@@ -26,8 +34,8 @@ public struct OPTIONS<T: Decodable>: HttpRequestMethod {
 }
 
 extension OPTIONS {
-    public func callAsFunction(_ path: [String: String]? = nil,
-                               query parameters: [String: String]? = nil,
+    public func callAsFunction(_ path: [String: StringRepresentable]? = nil,
+                               query parameters: [String: StringRepresentable?]? = nil,
                                completion: @escaping Completion<T>) {
         options(pathParameters: path, queryParamters: parameters, completion: completion)
     }
