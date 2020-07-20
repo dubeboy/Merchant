@@ -82,7 +82,7 @@ struct HTTPClient {
             url,
             method: method,
             parameters: body,
-//            encoder: encoder,
+            encoder: encoder,
             headers: HTTPHeaders(headers ?? [:])
         )
     }
