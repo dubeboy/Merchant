@@ -9,8 +9,7 @@ public struct POST<T: Decodable, U: Encodable>: MerchantHttpMethod {
             holder.merchant = merchant
         }
     }
-
- 
+    
     let path: String
     let formURLEncoded: Bool
     let headers: [String: String]?
@@ -35,8 +34,13 @@ public struct POST<T: Decodable, U: Encodable>: MerchantHttpMethod {
               completion: @escaping Completion<T>) {
         let url = createURL(with: pathParameters, and: queryParameters)
         
-        client.requestWithBody(url: url, method: .post, body: body, headers: headers,
-                               formURLEncoded: formURLEncoded, completion: completion)
+        client.requestWithBody(
+            url: url,
+            method: .post,
+            body: body,
+            headers: headers,
+            formURLEncoded: formURLEncoded,
+            completion: completion)
     }
 }
 

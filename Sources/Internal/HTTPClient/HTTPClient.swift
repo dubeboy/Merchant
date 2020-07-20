@@ -28,7 +28,7 @@ struct HTTPClient {
             case is Data.Type:
                 responseDecodeData(dataRequest: dataRequest, completion: completion as! Completion<Data>)
             default:
-                responseDecodeJSON(dataRequest: dataRequest, completion: completion)
+                responseDecodeJSONData(dataRequest: dataRequest, completion: completion)
         }
     }
     
@@ -44,11 +44,28 @@ struct HTTPClient {
             body: body,
             headers: headers,
             formURLEncoded: formURLEncoded
-        ).responseDecodable(of: T.self,
-                            decoder: decoder) { response in
-                                self.processResponse(response, completion: completion)
+        )
+        
+        switch T.self {
+            case is Data.Type:
+                responseDecodeData(dataRequest: dataRequest, completion: completion as! Completion<Data>)
+            default:
+                responseDecodeJSONData(dataRequest: dataRequest, completion: completion)
         }
     }
+    
+    private func responseDecodeJSONData<T: Decodable>(dataRequest: DataRequest, completion: @escaping Completion<T>) {
+        dataRequest.responseDecodable(of: T.self, decoder: decoder) { response in
+            self.processResponse(response, completion: completion)
+        }
+    }
+    
+    private func responseDecodeData(dataRequest: DataRequest, completion: @escaping Completion<Data>) {
+        dataRequest.responseData { response in
+            self.processResponse(response, completion: completion)
+        }
+    }
+    
     
     private func request<U: Encodable>(url: URL,
                                        method: HTTPMethod,
@@ -69,6 +86,7 @@ struct HTTPClient {
             headers: HTTPHeaders(headers ?? [:])
         )
     }
+    
     
     private func processResponse<T: Decodable>(_ response: AFDataResponse<T>,
                                                completion: @escaping Completion<T>) {
@@ -98,19 +116,4 @@ struct HTTPClient {
         }
     }
     
-    private func responseDecodeJSONData<T: Decodable>(dataRequest: DataRequest, completion: @escaping Completion<T>) {
-        dataRequest.responseDecodable(of: T.self, decoder: decoder) { response in
-            self.processResponse(response, completion: completion)
-        }
-    }
-    
-    private func responseDecodeData(dataRequest: DataRequest, completion: @escaping Completion<Data>) {
-//        dataRequest.responseData { response in
-//            self.processResponse(response, completion: completion)
-//        }
-        
-        dataRequest.response { response in
-            print(response)
-        }
-    }
 }

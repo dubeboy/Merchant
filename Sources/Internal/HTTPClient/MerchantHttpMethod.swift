@@ -1,6 +1,9 @@
 import Foundation
 import Alamofire
 
+
+
+
 protocol MerchantHttpMethodBase {
     var merchant: Merchant? { get set }
     var holder: Holder { get }
