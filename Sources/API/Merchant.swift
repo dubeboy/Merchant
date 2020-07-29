@@ -49,12 +49,14 @@ class Merchant: Service {
     private func setMerchant(to service: Service) {
         let mirror = Mirror(reflecting: service)
         for child in mirror.children {
-            if var method = child.value as? MerchantHttpMethodBase {
+            if var method = child.value as? AnyMerchantHttpMethod {
                 method.merchant = self
             }
         }
     }
 }
+
+// Create a singleton equivalent
 
 @propertyWrapper
 public struct Autowired<T: Service> {

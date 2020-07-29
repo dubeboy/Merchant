@@ -42,6 +42,7 @@ public struct GET<T: Decodable>: MerchantHttpMethod {
 }
 
 extension GET {
+    // should rename path -> path parameters
     public func callAsFunction(_ path: [String: StringRepresentable]? = nil,
                                query parameters: [String: StringRepresentable?]? = nil,
                                completion: @escaping Completion<T>) {

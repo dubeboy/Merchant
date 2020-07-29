@@ -1,15 +1,13 @@
 import Foundation
 import Alamofire
 
-
-
-
-protocol MerchantHttpMethodBase {
+/// Type errased HTTP method
+protocol AnyMerchantHttpMethod {
     var merchant: Merchant? { get set }
     var holder: Holder { get }
 }
 
-protocol MerchantHttpMethod: MerchantHttpMethodBase {
+protocol MerchantHttpMethod: AnyMerchantHttpMethod {
     
     associatedtype T: Decodable
 
