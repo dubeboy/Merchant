@@ -3,16 +3,19 @@ import XCTest
 
 class PostTests: XCTestCase {
 
+    @Autowired
+    var client: MockService
+
     func testSuccessfulPost() {
-        stubPostAlamofire(mockTestURL: baseURL + "/new_user", data: UserMock(id: 1, name: "John", surname: "Snow"))
+        client.stubPostAlamofire(mockTestURL: client.baseURL + "/new_user", data: UserMock(id: 1, name: "John", surname: "Snow"))
 
         let exp = expectation(description: "it should successfully return mock data")
 
         let post = POST<UserMock, UserMock>("/new_user", body: UserMock.self)
 
-        XCTAssertNil(userMock.id)
+        XCTAssertNil(Const.userMock.id)
 
-        post(body: userMock) { response in
+        post(body: Const.userMock) { response in
             XCTAssertEqual(try? response.get().body.id, 1)
             exp.fulfill()
         }
@@ -21,14 +24,14 @@ class PostTests: XCTestCase {
     }
     
     func testPostRequestBody() {
-        stubPostAlamofire(mockTestURL: baseURL + "/new_user", data: UserMock(name: "John", surname: "Snow"))
+        client.stubPostAlamofire(mockTestURL: client.baseURL + "/new_user", data: UserMock(name: "John", surname: "Snow"))
 
         let exp = expectation(description: "it should successfully return mock data")
 
         let post = POST<UserMock, UserMock>("/new_user", body: UserMock.self)
 
-        post(body: userMock) { response in
-            XCTAssertEqual(try! JSONDecoder().decode(UserMock.self, from: response.get().raw.request!.httpBody!), userMock)
+        post(body: Const.userMock) { response in
+            XCTAssertEqual(try! JSONDecoder().decode(UserMock.self, from: response.get().raw.request!.httpBody!), Const.userMock)
             exp.fulfill()
         }
 
@@ -36,7 +39,7 @@ class PostTests: XCTestCase {
     }
 
     func testPostContentType() {
-        stubPostAlamofire(mockTestURL: baseURL + "/new_user", data: userMock)
+        client.stubPostAlamofire(mockTestURL: client.baseURL + "/new_user", data: Const.userMock)
         let exp = expectation(description: "it should successfully return mock data")
 
         let post = POST<UserMock, String>("/new_user", body: String.self, headers: ["Content-Type": "text/plain"])
@@ -50,7 +53,7 @@ class PostTests: XCTestCase {
     }
 
     func testPostFormURLEncodedBody() {
-        stubPostAlamofire(mockTestURL: baseURL + "/new_user", data: userMock)
+        client.stubPostAlamofire(mockTestURL: client.baseURL + "/new_user", data: Const.userMock)
         let exp = expectation(description: "it should successfully return mock data")
 
         let post = POST<UserMock, UserMock>("/new_user", body: UserMock.self, formURLEncoded: true)
@@ -66,7 +69,7 @@ class PostTests: XCTestCase {
     func testPostNormalBody() {
 
         let postBody = UserMock(id: 1, name: "J Ann", surname: "Wa")
-        stubPostAlamofire(mockTestURL: baseURL + "/new_user", data: postBody)
+        client.stubPostAlamofire(mockTestURL: client.baseURL + "/new_user", data: postBody)
 
         let exp = expectation(description: "it should successfully return mock data")
 
@@ -82,7 +85,7 @@ class PostTests: XCTestCase {
 
 
     func testSuccessfulPostWithBasicBodyType() {
-        stubPostAlamofire(mockTestURL: baseURL + "/new_user", data: userMock)
+        client.stubPostAlamofire(mockTestURL: client.baseURL + "/new_user", data: Const.userMock)
         let exp = expectation(description: "it should successfully return mock data")
 
         let post = POST<UserMock, String>("/new_user", body: String.self)
@@ -99,7 +102,7 @@ class PostTests: XCTestCase {
 
     func testCorrectPostPathWithPath() {
 
-        stubPostAlamofire(mockTestURL: baseURL + "/some/random/path", data: userMock)
+        client.stubPostAlamofire(mockTestURL: client.baseURL + "/some/random/path", data: Const.userMock)
 
         let exp = expectation(description: "custom path should be injected as part of the URL")
 
@@ -116,15 +119,15 @@ class PostTests: XCTestCase {
 
     func testCorrectPostPathWithNoPath() {
 
-        stubPostAlamofire(mockTestURL: baseURL, data: userMock)
+        client.stubPostAlamofire(mockTestURL: client.baseURL, data: Const.userMock)
 
         let exp = expectation(description: "custom path should be injected as part of the URL")
 
         let post = POST<UserMock, UserMock>(body: UserMock.self)
 
-        post(body: postUserMock) { response in
+        post(body: Const.postUserMock) { response in
             let rawResponse = try! response.get().raw
-            XCTAssertEqual(rawResponse.request!.url!.absoluteString, baseURL)
+            XCTAssertEqual(rawResponse.request!.url!.absoluteString, self.client.baseURL)
             exp.fulfill()
         }
 
@@ -134,13 +137,13 @@ class PostTests: XCTestCase {
 
 
     func testCorrectPostPathValuesInjection() {
-        stubPostAlamofire(mockTestURL: baseURL + "/users/56/profile/45", data: userMock)
+        client.stubPostAlamofire(mockTestURL: client.baseURL + "/users/56/profile/45", data: Const.userMock)
 
         let exp = expectation(description: "custom path values should be injected as part of the URL")
 
         let post = POST<UserMock, UserMock>("/users/{user_id}/profile/{comment_id}", body: UserMock.self)
 
-        post(["user_id": "56", "comment_id": "45"], body: postUserMock) { response in
+        post(["user_id": "56", "comment_id": "45"], body: Const.postUserMock) { response in
             let rawResponse = try! response.get().raw
             XCTAssertEqual(rawResponse.request!.url!.path, "/hello/users/56/profile/45")
             exp.fulfill()
@@ -150,13 +153,13 @@ class PostTests: XCTestCase {
     }
 
     func testSystemWideQueryIsApplied() {
-        stubPostAlamofire(mockTestURL: baseURL + "/new_user", data: UserMock(id: 1, name: "John", surname: "Snow"))
+        client.stubPostAlamofire(mockTestURL: client.baseURL + "/new_user", data: UserMock(id: 1, name: "John", surname: "Snow"))
 
         let exp = expectation(description: "request headers should contain the global query paramters")
 
         let post = POST<UserMock, UserMock>("/new_user", body: UserMock.self)
 
-        post(body: userMock) { response in
+        post(body: Const.userMock) { response in
             XCTAssertEqual(try? response.get().body.id, 1)
             exp.fulfill()
         }
@@ -165,14 +168,14 @@ class PostTests: XCTestCase {
     }
 
     func testCorrectQueryPath() {
-        stubPostAlamofire(mockTestURL: baseURL + "/new_user", data: userMock)
+        client.stubPostAlamofire(mockTestURL: client.baseURL + "/new_user", data: Const.userMock)
 
         let exp = expectation(description: "testCorrectQueryPath")
 
         let post = POST<UserMock, UserMock>("/new_user", body: UserMock.self)
 
         let query = ["a": "Hello world", "q":"Hi"]
-        post(query: query,  body: userMock) { response in
+        post(query: query,  body: Const.userMock) { response in
 
             let urlString = try? response.get().raw.request!.url!.absoluteString
 
@@ -187,17 +190,17 @@ class PostTests: XCTestCase {
     }
 
     func testGlobalQuery() {
-        stubPostAlamofire(mockTestURL: baseURL + "/new_user", data: userMock, globalQuery: true)
+        client.stubPostAlamofire(mockTestURL: client.baseURL + "/new_user", data: Const.userMock, globalQuery: true)
 
         let exp = expectation(description: "request headers should contain the global query paramters")
 
         let post = POST<UserMock, UserMock>("/new_user", body: UserMock.self)
 
-        post(body: userMock) { response in
+        post(body: Const.userMock) { response in
 
             let urlString = try? response.get().raw.request!.url!.absoluteString
 
-            XCTAssertEqual(urlString, "\(baseURL)/new_user?api_key=1234567890_XYZ")
+            XCTAssertEqual(urlString, "\(self.client.baseURL)/new_user?api_key=1234567890_XYZ")
             exp.fulfill()
         }
 

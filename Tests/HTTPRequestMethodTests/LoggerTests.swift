@@ -147,28 +147,21 @@ extension String {
     static var REGEX_REPONSE_TIME: String { "⬅️\\s200\\s\\(\\d{1,2}\\.\\d{2}ms\\)" }
 }
 
-extension XCTestCase {
-    func makeRequest(logLevel: LogLevel, logResponse: @escaping (_ message: [String]) -> Void) {
-        let logger = MockMerchantLogger(logLevel)
-        stubPostAlamofire(mockTestURL: baseURL,
-                          method: .post,
-                          data: userMock,
-                          logger: logger)
+extension MockService {
 
-        let exp = expectation(description: #function)
+    mutating func makeRequest(logLevel: LogLevel, logResponse: @escaping (_ message: [String]) -> Void) {
+        self.stubPostAlamofire(mockTestURL: baseURL,
+                          method: .post,
+                          data: Const.userMock,
+                          logger: logger)
 
         let post = POST<UserMock, UserMock>(body: UserMock.self,
                                             formURLEncoded: true,
                                             headers: ["Content-Type": "text/plain"])
 
-        post(body: userMock) { _ in
+        post(body: Const.userMock) { response in
 
-            logResponse(logger.message)
-
-            exp.fulfill()
         }
-
-        wait(for: [exp], timeout: 10)
     }
 
     func matches(_ string: String, regex: String) -> Bool {

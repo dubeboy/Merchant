@@ -21,6 +21,7 @@ public struct GET<T: Decodable>: MerchantHttpMethod {
     
     public var projectedValue: Self { self }
 
+    // expose alamofire HTTPHeader instead they are more powerful
     public init(_ path: String = "", headers: [String: String]? = nil) {
         self.path = path
         self.headers = headers

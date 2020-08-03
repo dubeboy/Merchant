@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-Type-safe HTTP client for iOS inspired by https://github.com/square/retrofit
+Type-safe Swift HTTP client for iOS and MacOS inspired by https://github.com/square/retrofit
                        DESC
 
   s.homepage         = 'https://github.com/dubeboy/Merchant'

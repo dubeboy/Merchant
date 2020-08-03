@@ -50,6 +50,13 @@ struct HTTPClient {
             headers: headers,
             formURLEncoded: formURLEncoded
         )
+        
+        switch T.self {
+            case is Data.Type:
+                responseDecodeData(dataRequest: dataRequest, completion: completion as! Completion<Data>)
+            default:
+                responseDecodeJSON(dataRequest: dataRequest, completion: completion)
+        }
     }
 }
 
@@ -61,7 +68,7 @@ extension HTTPClient {
                             request: DataRequest,
                             completion: @escaping Completion<T>) {
         if type is Data {
-            // Safe unwrap here because we are guarteed that T is Data
+            // Safe to unwrap here because we are guaranteed that T is Data
             responseDecodeData(dataRequest: request, completion: completion as! Completion<Data>)
         } else {
             responseDecodeJSON(dataRequest: request, completion: completion)
@@ -107,6 +114,7 @@ extension HTTPClient {
         guard let urlResponse = response.response else {
             return completion(
                 .failure(
+                    // try to return arEffor
                     MerchantError.error(localizedDescription: .errorNilInstance)
                 )
             )
@@ -124,7 +132,7 @@ extension HTTPClient {
                     )
                 )
             case .failure(let error):
-                return completion(.failure(error))
+               return completion(.failure(error))
         }
     }
     

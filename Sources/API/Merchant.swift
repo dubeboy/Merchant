@@ -11,13 +11,13 @@ class Merchant: Service {
     
     init(service: Service) {
         self.service = service
-        logger = MerchantLogger(level: service.level ?? .body)
+        logger = MerchantLogger(level: service.logger ?? .body)
         session = Merchant.create(with: service)
         client = HTTPClient(session: session, logger: logger) // TODO: - Can be better
         setMerchant(to: service)
     }
     
-    // Create a new Alamofire from the session given by the developer
+    // Creates a new Alamofire session from the session given by the developer
     private static func create(with service: Service) -> Session {
         if let session = service.session {
             return Session(
@@ -32,10 +32,10 @@ class Merchant: Service {
                 redirectHandler: session.redirectHandler,
                 cachedResponseHandler: session.cachedResponseHandler,
                 eventMonitors: [session.eventMonitor,
-                                createEventMonitor(level: service.level)]
+                                createEventMonitor(level: service.logger)]
             )
         }
-        return Session(eventMonitors: [createEventMonitor(level: service.level)])
+        return Session(eventMonitors: [createEventMonitor(level: service.logger)])
     }
     
     private static func createEventMonitor(level: LogLevel?) -> LogEventMonitor {
@@ -65,7 +65,7 @@ public struct Autowired<T: Service> {
     var service: T
     
     public var wrappedValue: T {
-        return service
+        service
     }
     
     public init(service: Service = T()) {

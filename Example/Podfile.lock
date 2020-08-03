@@ -1,10 +1,10 @@
 PODS:
   - Alamofire (5.2.0)
-  - Merchant (0.1.1):
-    - Merchant/Core (= 0.1.1)
-  - Merchant/Core (0.1.1):
+  - Merchant (0.1.2):
+    - Merchant/Core (= 0.1.2)
+  - Merchant/Core (0.1.2):
     - Alamofire (~> 5.0)
-  - Merchant/Tests (0.1.1):
+  - Merchant/Tests (0.1.2):
     - Mocker (~> 2.0.0)
   - Mocker (2.0.2)
 
@@ -23,7 +23,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: c1ca147559e730bfb2182c8c7aafbdd90a867987
-  Merchant: c95ff8b99ce9b6b1186d72b18aad1bb93c891832
+  Merchant: 8d136c79ce50cc0fa1e41fd77c144df2b386d8d0
   Mocker: 0f0e41a3d47868b42879d2aa177a16f9097a48a4
 
 PODFILE CHECKSUM: 03d3cfed5b31501fa0c155160d5802ca64349d0c

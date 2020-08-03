@@ -23,7 +23,7 @@ struct StatusReponse<T: Decodable> : Decodable {
 
 struct HTTPService: Service {
     var baseURL: String = "https://httpbin.org/"
-    var level: LogLevel? = .body
+    var logger: LogLevel? = .body
     
     @GET("image/png", headers: ["accept": "image/png"])
     var get: Data

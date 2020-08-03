@@ -5,18 +5,23 @@ protocol Logger {
     func log(_ response: HTTPURLResponse?, data: Data?, metrics: URLSessionTaskMetrics?)
 }
 
-struct MerchantLogger: Logger {
+open class MerchantLogger: Logger {
 
     private let level: LogLevel
+    private let formatter: DateFormatter
+    private let loggerOutput: LoggerOutput
+
     private let output = "➡️"
     private let input = "⬅️"
-    private let end = "END HTTP"
-    private let formater = DateFormatter()
-    private let loggerOutput: LoggerOutput = STDOutLogger.instance
+    private let end = "🚨 END HTTP 🚨"
 
-    init(level: LogLevel) {
-        formater.dateFormat = "yy-MM-dd HH:mm:ss.SSS"
+    init(level: LogLevel,
+         loggerOutput: LoggerOutput = STDOutLogger.instance,
+         formatter: DateFormatter = DateFormatter()) {
+        formatter.dateFormat = "yy-MM-dd HH:mm:ss.SSS"
         self.level = level
+        self.formatter = formatter
+        self.loggerOutput = loggerOutput
     }
     
     func log(_ request: URLRequest?) {
@@ -29,7 +34,7 @@ struct MerchantLogger: Logger {
         }
         
         if level == .basic || level == .headers || level == .body {
-            log("🚀 \(formater.string(from: Date()))")
+            log("🚀 \(formatter.string(from: Date()))")
             log("\(output) \(request.method?.rawValue ?? "nil") \(getPath(request.url?.absoluteString))")
         }
         
