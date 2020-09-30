@@ -2,7 +2,8 @@ import Foundation
 import Alamofire
 
 public typealias Completion<T: Decodable> = (_ result: Result<ResponseObject<T>, Error>) -> Void
-
+// TODO: test spead if these methods using the measure test suite!!!
+// should we call clean up everytime
 struct HTTPClient {
     init(session: Session, logger: MerchantLogger) {
         self.session = session
@@ -20,20 +21,13 @@ struct HTTPClient {
                                method: HTTPMethod,
                                headers: [String: String]?,
                                completion: @escaping Completion<T>) {
-        // create an extenstion on HTTPHeaders that accepts a Nil value
-        let dataRequest = session.request(
-            url,
-            method: method,
-            headers: HTTPHeaders(headers ?? [:])
-        )
         
-        // create a private function that that handles all tge posible cases
-        switch T.self {
-            case is Data.Type:
-                responseDecodeData(dataRequest: dataRequest, completion: completion as! Completion<Data>)
-            default:
+        // TODO: Creates an extenstion on HTTPHeaders that accepts a Nil value
+        // You can see the curl request, its worth while to check how they do it!!!!
+        let dataRequest = session.request(url,
+                                          method: method,
+                                          headers: HTTPHeaders(headers ?? [:]))
                 responseDecodeJSON(dataRequest: dataRequest, completion: completion)
-        }
     }
     
     /// Facilitates HTTP requests that require a body parameter
@@ -43,20 +37,25 @@ struct HTTPClient {
                                                      headers: [String: String]?,
                                                      formURLEncoded: Bool,
                                                      completion: @escaping Completion<T>) {
-        let dataRequest = request(
-            url: url,
-            method: method,
-            body: body,
-            headers: headers,
-            formURLEncoded: formURLEncoded
-        )
+        let dataRequest = request(url: url,
+                                       method: method,
+                                       body: body,
+                                       headers: headers,
+                                       formURLEncoded: formURLEncoded)
         
-        switch T.self {
-            case is Data.Type:
-                responseDecodeData(dataRequest: dataRequest, completion: completion as! Completion<Data>)
-            default:
-                responseDecodeJSON(dataRequest: dataRequest, completion: completion)
-        }
+            responseDecodeJSON(dataRequest: dataRequest, completion: completion)
+    }
+    
+    func uploadMiltipartFormData<T: Decodable>(url: URL,
+                                 multipartBody: [MultipartBody],
+                                 completion: @escaping Completion<T>) {
+        let uploadRequest = session.upload(multipartFormData: { multipartFormData in
+            multipartBody.forEach { body in
+                multipartFormData.append(body.body, withName: body.name, fileName: "SomeName", mimeType: body.mime)
+            }
+        }, to: url)
+        
+        responseDecodeJSON(dataRequest: uploadRequest, completion: completion)
     }
 }
 
@@ -67,17 +66,13 @@ extension HTTPClient {
     private func respond<T>(type: T,
                             request: DataRequest,
                             completion: @escaping Completion<T>) {
-        if type is Data {
-            // Safe to unwrap here because we are guaranteed that T is Data
-            responseDecodeData(dataRequest: request, completion: completion as! Completion<Data>)
-        } else {
             responseDecodeJSON(dataRequest: request, completion: completion)
-        }
     }
     
+//    body: U? = (()) as? U, try this out yoh!!
     private func request<U: Encodable>(url: URL,
                                        method: HTTPMethod,
-                                       body: U?,
+                                       body: U? = (()) as? U,
                                        headers: [String: String]?,
                                        formURLEncoded: Bool) -> DataRequest {
         var encoder: ParameterEncoder = JSONParameterEncoder.default
@@ -100,15 +95,9 @@ extension HTTPClient {
         }
     }
     
-    private func responseDecodeData(dataRequest: DataRequest, completion: @escaping Completion<Data>) {
-        dataRequest.responseData { response in
-            self.processResponse(response, completion: completion)
-        }
-    }
-    
     private func processResponse<T: Decodable>(_ response: AFDataResponse<T>,
                                                completion: @escaping Completion<T>) {
-        // TODO: Should log data on another thread probably
+        
         logger.log(response.response, data: response.data, metrics: response.metrics)
         
         guard let urlResponse = response.response else {

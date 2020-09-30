@@ -3,8 +3,7 @@ import XCTest
 
 class PostTests: XCTestCase {
 
-    @Autowired
-    var client: MockService
+    var client: MockService = MockService()
 
     func testSuccessfulPost() {
         client.stubPostAlamofire(mockTestURL: client.baseURL + "/new_user", data: UserMock(id: 1, name: "John", surname: "Snow"))

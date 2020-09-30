@@ -1,6 +1,7 @@
 import Alamofire
 
-class Merchant: Service {
+// TODO: facilitate testing , maybe???
+class Merchant: Service { // Should this be a class?
     var service: Service
     var logger: MerchantLogger // todo better name
     var session: Session
@@ -71,7 +72,7 @@ public struct Autowired<T: Service> {
     public init(service: Service = T()) {
         self.merchant = Merchant(service: service)
         guard let service = merchant.service as? T else {
-            preconditionFailure(.errorUnexpected)
+            preconditionFailure(.errorUnexpected) // TODO: this should be a clearer error!!!
         }
         self.service = service
     }

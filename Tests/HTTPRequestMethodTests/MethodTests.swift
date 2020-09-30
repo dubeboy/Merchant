@@ -5,7 +5,7 @@ final class MethodTests: XCTestCase  {
     
     // MARK: - GET
     
-    override func setUp() {
+    override func setUp() { 
         super.setUp()
         stubAlamofire()
     }

@@ -1,6 +1,9 @@
 import Foundation
 
 public enum LogLevel {
+    
+    // TODO Add curl style
+    
     /**
        Logs request and response lines.
      

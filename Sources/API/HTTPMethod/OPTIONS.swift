@@ -2,8 +2,8 @@ import Foundation
 
 @propertyWrapper
 public struct OPTIONS<T: Decodable>: MerchantHttpMethod {
-    let holder: Holder = Holder()
-    
+    let holder: Holder = Holder() // TODO: memery test this should release meoemy on deini
+
     var merchant: Merchant? {
         didSet {
             holder.merchant = merchant
