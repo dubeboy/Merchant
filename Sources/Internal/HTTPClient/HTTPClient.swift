@@ -50,12 +50,13 @@ struct HTTPClient {
                                  multipartBody: [MultipartBody],
                                  completion: @escaping Completion<T>) {
         let uploadRequest = session.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(Data("one".utf8), withName: "one")
             multipartBody.forEach { body in
-                multipartFormData.append(body.body, withName: body.name, fileName: "SomeName", mimeType: body.mime)
+                multipartFormData.append(body.body, withName: body.name, fileName: body.filename, mimeType: body.mime)
             }
         }, to: url)
-        
-        responseDecodeJSON(dataRequest: uploadRequest, completion: completion)
+               
+       responseDecodeJSON(dataRequest: uploadRequest, completion: completion)
     }
 }
 

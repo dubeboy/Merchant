@@ -16,6 +16,6 @@ extension String {
     
     static let errorNilRequest = "❌ Nil URLRequest"
     
-    static let errorUnexpected = "❌ An unexpected error happened, Please log bug github: `https://github.com/dubeboy/Merchant/issues/new`"
+    static let errorUnexpected = "❌ An unexpected error happened, Please log bug on github `https://github.com/dubeboy/Merchant/issues/new"
     
 }
