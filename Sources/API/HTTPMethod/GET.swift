@@ -14,6 +14,7 @@ public struct GET<T: Decodable>: MerchantHttpMethod {
     var path: String
     var headers: [String: String]?
     
+    // Try and move this to protocol please it will reduce the code we have to type
     public var wrappedValue: T {
         get { preconditionFailure(.errorMethodGet) }
         set { preconditionFailure(.errorMethodSet) }
@@ -27,8 +28,11 @@ public struct GET<T: Decodable>: MerchantHttpMethod {
         self.headers = headers
     }
 
-    func get(pathParameters: [String: StringRepresentable]? = nil, queryParamters: [String: StringRepresentable?]? = nil,
-             completion: @escaping Completion<T>) {
+    func get(
+        pathParameters: [String: StringRepresentable]? = nil,
+        queryParamters: [String: StringRepresentable?]? = nil,
+        completion: @escaping Completion<T>
+    ) {
         let url = createURL(with: pathParameters, and: queryParamters)
         client.request(url: url, method: .get, headers: headers, completion: completion)
     }
