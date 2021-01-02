@@ -1,4 +1,5 @@
 import Alamofire
+import Foundation
 
 class LogEventMonitor: EventMonitor {
 
