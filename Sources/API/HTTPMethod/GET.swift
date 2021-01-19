@@ -27,23 +27,6 @@ public struct GET<T: Decodable>: MerchantHttpMethod {
         self.path = path
         self.headers = headers
     }
-
-    func get(
-        pathParameters: [String: StringRepresentable]? = nil,
-        queryParamters: [String: StringRepresentable?]? = nil,
-        completion: @escaping Completion<T>
-    ) {
-        let url = createURL(with: pathParameters, and: queryParamters)
-        client.request(url: url, method: .get, headers: headers, completion: completion)
-    }
-    
-    private func getDataDecodable(
-        pathParameters: [String: StringRepresentable]? = nil, queryParamters: [String:
-        StringRepresentable?]? = nil,
-        completion: @escaping Completion<Data>
-    ) {
-        
-    }
 }
 
 extension GET {
@@ -52,6 +35,30 @@ extension GET {
                                query parameters: [String: StringRepresentable?]? = nil,
                                completion: @escaping Completion<T>) {
         get(pathParameters: path, queryParamters: parameters, completion: completion)
+    }
+    
+    private func get(pathParameters: [String: StringRepresentable]? = nil,
+                     queryParamters: [String: StringRepresentable?]? = nil,
+                     completion: @escaping Completion<T>) {
+        
+        let url = createURL(with: pathParameters, and: queryParamters)
+        client.request(url: url, method: .get, headers: headers, completion: completion)
+    }
+}
+
+extension GET where T == Data {
+    public func callAsFunction(_ path: [String: StringRepresentable]? = nil,
+                               query parameters: [String: StringRepresentable?]? = nil,
+                               completion: @escaping Completion<T>) {
+        getData(pathParameters: path, queryParamters: parameters, completion: completion)
+    }
+
+    private func getData(pathParameters: [String: StringRepresentable]? = nil,
+                         queryParamters: [String: StringRepresentable?]? = nil,
+                         completion: @escaping Completion<Data>) {
+
+        let url = createURL(with: pathParameters, and: queryParamters)
+        client.requestData(url: url, headers: headers, completion: completion)
     }
 }
 

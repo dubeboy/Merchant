@@ -16,7 +16,7 @@ struct HTTPClient {
     
     // MARK: ALAMOFIRE powered HTTP methods
     
-    /// Facilitates HTTP requests that do not require a body parameter
+    /// Facilitates HTTP requests that do not require a body parameter for JSON Data
     func request<T: Decodable>(url: URL,
                                method: HTTPMethod,
                                headers: [String: String]?,
@@ -27,7 +27,7 @@ struct HTTPClient {
         let dataRequest = session.request(url,
                                           method: method,
                                           headers: HTTPHeaders(headers ?? [:]))
-                responseDecodeJSON(dataRequest: dataRequest, completion: completion)
+        responseDecodeJSON(dataRequest: dataRequest, completion: completion)
     }
     
     /// Facilitates HTTP requests that require a body parameter
@@ -50,7 +50,6 @@ struct HTTPClient {
                                  multipartBody: [MultipartBody],
                                  completion: @escaping Completion<T>) {
         let uploadRequest = session.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(Data("one".utf8), withName: "one")
             multipartBody.forEach { body in
                 multipartFormData.append(body.body, withName: body.name, fileName: body.filename, mimeType: body.mime)
             }
@@ -58,11 +57,17 @@ struct HTTPClient {
                
        responseDecodeJSON(dataRequest: uploadRequest, completion: completion)
     }
+    
+    func requestData(url: URL, headers: [String: String]?, completion: @escaping Completion<Data>) {
+        // add validations maybe? and disk support
+         let dataRequest = session.request(url, method: .get, headers: HTTPHeaders(headers ?? [:]))
+         reponseData(dataRequest: dataRequest, completion: completion)
+    }
 }
 
-// MARK: Helper functions
+// MARK: - Helper functions
 
-extension HTTPClient {
+private extension HTTPClient {
     
     private func respond<T>(type: T,
                             request: DataRequest,
@@ -93,6 +98,12 @@ extension HTTPClient {
     private func responseDecodeJSON<T: Decodable>(dataRequest: DataRequest, completion: @escaping Completion<T>) {
         dataRequest.responseDecodable(of: T.self, decoder: decoder) { response in
             self.processResponse(response, completion: completion)
+        }
+    }
+    
+    private func reponseData(dataRequest: DataRequest, completion: @escaping Completion<Data>) {
+        dataRequest.responseData { response in
+            processResponse(response, completion: completion)
         }
     }
     

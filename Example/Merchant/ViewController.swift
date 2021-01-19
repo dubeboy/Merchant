@@ -19,18 +19,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         imageView.backgroundColor = .brown
-//        client.$get { response in
-//            switch response {
-//                case .success(let success):
-//                    let data = success.body
-//                    print(data)
-//                    let uiImage = UIImage(data: data)
-//                    self.imageView.image = uiImage
-//                    
-//                case .failure(let e):
-//                    print(e)
-//            }
-//        }
+        client.$get { response in
+            switch response {
+                case .success(let success):
+                    let data = success.body
+                    print(data)
+                    let uiImage = UIImage(data: data)
+                    self.imageView.image = uiImage
+                    
+                case .failure(let e):
+                    print(e)
+            }
+        }
         
         
     }
