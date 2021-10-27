@@ -52,7 +52,7 @@ open class MerchantLogger: Logger {
         
         if level == .basic || level == .headers || level == .body {
             let splitSec = String(format: "%.2f", metrics?.taskInterval.duration ?? -1)
-            log("\(input) \(response.statusCode) (\(splitSec)ms)")
+            log("\(input) \(response.statusCode) (\(splitSec)ms)") // TODO change thi
         }
         
         logCommon(level, data: data, headers: response.allHeaderFields, isRequest: false)

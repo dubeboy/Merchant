@@ -94,7 +94,7 @@ extension MerchantHttpMethod {
         let regex = try! NSRegularExpression(pattern: "\\{.*?\\}")
         let res = regex.matches(in: path, options: [], range: range)
         return res
-            .map { String(path[Range($0.range, in: path)!]) } // force unwrap optimize
+            .map { String(path[Range($0.range, in: path)!]) }
             .map {
                 $0.replacingOccurrences(of: "{", with: "")
                 .replacingOccurrences(of: "}", with: "")
