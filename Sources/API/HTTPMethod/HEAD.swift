@@ -8,7 +8,6 @@ public struct HEAD: MerchantHttpMethod {
         }
     }
 
-
     public typealias T = Nothing
     
     var path: String

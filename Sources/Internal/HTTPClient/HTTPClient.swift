@@ -2,61 +2,91 @@ import Foundation
 import Alamofire
 
 public typealias Completion<T: Decodable> = (_ result: Result<ResponseObject<T>, Error>) -> Void
-
+// TODO: test spead if these methods using the measure test suite!!!
+// should we call clean up everytime
 struct HTTPClient {
+    init(session: Session, logger: MerchantLogger) {
+        self.session = session
+        self.logger = logger
+    }
+    
     let session: Session
     let logger: MerchantLogger
     let decoder: JSONDecoder = JSONDecoder()
     
+    // MARK: ALAMOFIRE powered HTTP methods
+    
+    /// Facilitates HTTP requests that do not require a body parameter for JSON Data
     func request<T: Decodable>(url: URL,
-                 method: HTTPMethod,
-                 headers: [String: String]?,
-                 completion: @escaping Completion<T>) {
+                               method: HTTPMethod,
+                               headers: [String: String]?,
+                               completion: @escaping Completion<T>) {
         
-        let dataRequest = session.request(
-            url,
-            method: method,
-            headers: HTTPHeaders(headers ?? [:])
-        )
-        
-        switch T.self {
-            case is Data.Type:
-                responseDecodeData(dataRequest: dataRequest, completion: completion as! Completion<Data>)
-            default:
-               responseDecodeJSONData(dataRequest: dataRequest, completion: completion)
-        }
-    }
-
-    func requestWithBody<T: Decodable, U: Encodable>(url: URL,
-                                       method: HTTPMethod,
-                                       body: U?,
-                                       headers: [String: String]?,
-                                       formURLEncoded: Bool,
-                                       completion: @escaping Completion<T>) {
-        request(
-            url: url,
-            method: method,
-            body: body,
-            headers: headers,
-            formURLEncoded: formURLEncoded
-        ).responseDecodable(of: T.self,
-                            decoder: decoder) { response in
-                                self.processResponse(response, completion: completion)
-        }
+        // TODO: Creates an extenstion on HTTPHeaders that accepts a Nil value
+        // You can see the curl request, its worth while to check how they do it!!!!
+        let dataRequest = session.request(url,
+                                          method: method,
+                                          headers: HTTPHeaders(headers ?? [:]))
+        responseDecodeJSON(dataRequest: dataRequest, completion: completion)
     }
     
-    private func request<U: Encodable>(url: URL,
-                               method: HTTPMethod,
-                               body: U?,
-                               headers: [String: String]?,
-                               formURLEncoded: Bool) -> DataRequest {
+    /// Facilitates HTTP requests that require a body parameter
+    func requestWithBody<T: Decodable, U: Encodable>(url: URL,
+                                                     method: HTTPMethod,
+                                                     body: U?,
+                                                     headers: [String: String]?,
+                                                     formURLEncoded: Bool,
+                                                     completion: @escaping Completion<T>) {
+        let dataRequest = request(url: url,
+                                       method: method,
+                                       body: body,
+                                       headers: headers,
+                                       formURLEncoded: formURLEncoded)
         
+            responseDecodeJSON(dataRequest: dataRequest, completion: completion)
+    }
+    
+    func uploadMiltipartFormData<T: Decodable>(url: URL,
+                                 multipartBody: [MultipartBody],
+                                 completion: @escaping Completion<T>) {
+        let uploadRequest = session.upload(multipartFormData: { multipartFormData in
+            multipartBody.forEach { body in
+                multipartFormData.append(body.body, withName: body.name, fileName: body.filename, mimeType: body.mime)
+            }
+        }, to: url)
+               
+       responseDecodeJSON(dataRequest: uploadRequest, completion: completion)
+    }
+    
+    func requestData(url: URL, headers: [String: String]?, completion: @escaping Completion<Data>) {
+        // add validations maybe? and disk support
+         let dataRequest = session.request(url, method: .get, headers: HTTPHeaders(headers ?? [:]))
+         reponseData(dataRequest: dataRequest, completion: completion)
+    }
+}
+
+// MARK: - Helper functions
+
+private extension HTTPClient {
+    
+    private func respond<T>(type: T,
+                            request: DataRequest,
+                            completion: @escaping Completion<T>) {
+            responseDecodeJSON(dataRequest: request, completion: completion)
+    }
+    
+//    body: U? = (()) as? U, try this out yoh!!
+    private func request<U: Encodable>(url: URL,
+                                       method: HTTPMethod,
+                                       body: U? = (()) as? U,
+                                       headers: [String: String]?,
+                                       formURLEncoded: Bool) -> DataRequest {
         var encoder: ParameterEncoder = JSONParameterEncoder.default
         if formURLEncoded {
             encoder = URLEncodedFormParameterEncoder.default
         }
         
-       return session.request(
+        return session.request(
             url,
             method: method,
             parameters: body,
@@ -65,19 +95,32 @@ struct HTTPClient {
         )
     }
     
+    private func responseDecodeJSON<T: Decodable>(dataRequest: DataRequest, completion: @escaping Completion<T>) {
+        dataRequest.responseDecodable(of: T.self, decoder: decoder) { response in
+            self.processResponse(response, completion: completion)
+        }
+    }
+    
+    private func reponseData(dataRequest: DataRequest, completion: @escaping Completion<Data>) {
+        dataRequest.responseData { response in
+            processResponse(response, completion: completion)
+        }
+    }
+    
     private func processResponse<T: Decodable>(_ response: AFDataResponse<T>,
-                                 completion: @escaping Completion<T>) {
-
-        self.logger.log(response.response, data: response.data, metrics: response.metrics)
-
+                                               completion: @escaping Completion<T>) {
+        
+        logger.log(response.response, data: response.data, metrics: response.metrics)
+        
         guard let urlResponse = response.response else {
             return completion(
                 .failure(
+                    // try to return arEffor
                     MerchantError.error(localizedDescription: .errorNilInstance)
                 )
             )
         }
-
+        
         switch response.result {
             case .success(let model):
                 return completion(
@@ -90,19 +133,8 @@ struct HTTPClient {
                     )
                 )
             case .failure(let error):
-                return completion(.failure(error))
+               return completion(.failure(error))
         }
     }
     
-    private func responseDecodeJSONData<T: Decodable>(dataRequest: DataRequest, completion: @escaping Completion<T>) {
-        dataRequest.responseDecodable(of: T.self, decoder: decoder) { response in
-            self.processResponse(response, completion: completion)
-        }
-    }
-    
-    private func responseDecodeData(dataRequest: DataRequest, completion: @escaping Completion<Data>) {
-        dataRequest.responseData { response in
-            self.processResponse(response, completion: completion)
-        }
-    }
 }

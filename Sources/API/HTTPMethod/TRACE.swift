@@ -10,7 +10,6 @@ public struct TRACE: MerchantHttpMethod {
         }
     }
 
-
     public typealias T = Nothing
     
     var path: String

@@ -1,6 +1,7 @@
 import Alamofire
 
-class Merchant: Service {
+// TODO: facilitate testing , maybe???
+class Merchant: Service { // Should this be a class?
     var service: Service
     var logger: MerchantLogger // todo better name
     var session: Session
@@ -11,13 +12,13 @@ class Merchant: Service {
     
     init(service: Service) {
         self.service = service
-        logger = MerchantLogger(level: service.level ?? .body)
+        logger = MerchantLogger(level: service.logger ?? .body)
         session = Merchant.create(with: service)
         client = HTTPClient(session: session, logger: logger) // TODO: - Can be better
         setMerchant(to: service)
     }
     
-    // Create a new Alamofire from the session given by the developer
+    // Creates a new Alamofire session from the session given by the developer
     private static func create(with service: Service) -> Session {
         if let session = service.session {
             return Session(
@@ -32,10 +33,10 @@ class Merchant: Service {
                 redirectHandler: session.redirectHandler,
                 cachedResponseHandler: session.cachedResponseHandler,
                 eventMonitors: [session.eventMonitor,
-                                createEventMonitor(level: service.level)]
+                                createEventMonitor(level: service.logger)]
             )
         }
-        return Session(eventMonitors: [createEventMonitor(level: service.level)])
+        return Session(eventMonitors: [createEventMonitor(level: service.logger)])
     }
     
     private static func createEventMonitor(level: LogLevel?) -> LogEventMonitor {
@@ -49,12 +50,14 @@ class Merchant: Service {
     private func setMerchant(to service: Service) {
         let mirror = Mirror(reflecting: service)
         for child in mirror.children {
-            if var method = child.value as? MerchantHttpMethodBase {
+            if var method = child.value as? AnyMerchantHttpMethod {
                 method.merchant = self
             }
         }
     }
 }
+
+// Create a singleton equivalent
 
 @propertyWrapper
 public struct Autowired<T: Service> {
@@ -63,13 +66,13 @@ public struct Autowired<T: Service> {
     var service: T
     
     public var wrappedValue: T {
-        return service
+        service
     }
     
     public init(service: Service = T()) {
         self.merchant = Merchant(service: service)
         guard let service = merchant.service as? T else {
-            preconditionFailure(.errorUnexpected)
+            preconditionFailure(.errorUnexpected) // TODO: this should be a clearer error!!!
         }
         self.service = service
     }

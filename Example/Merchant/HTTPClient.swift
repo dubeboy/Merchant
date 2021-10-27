@@ -22,11 +22,18 @@ struct StatusReponse<T: Decodable> : Decodable {
 
 
 struct HTTPService: Service {
-    var baseURL: String = "https://httpbin.org/image"
+    var baseURL: String = "https://httpbin.org/"
+    var logger: LogLevel? = .body
     
-    @GET(headers: ["accept": "image/webp"])
+    @GET("image/png", headers: ["accept": "image/png"])
     var get: Data
     
-    @POST(body: String.self)
-    var postIt: Grocery
+    // //anything  does not fail why?
+    @POST("anything", body: Data.self,
+          headers: ["accept": "image/png",
+                    "content-type": " image/png"])
+    var postImageData: Data
+    
+    func doSomeDamage() {
+    }
 }

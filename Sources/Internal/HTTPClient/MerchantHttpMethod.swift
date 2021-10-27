@@ -1,12 +1,13 @@
 import Foundation
 import Alamofire
 
-protocol MerchantHttpMethodBase {
+/// Type errased HTTP method
+protocol AnyMerchantHttpMethod {
     var merchant: Merchant? { get set }
     var holder: Holder { get }
 }
 
-protocol MerchantHttpMethod: MerchantHttpMethodBase {
+protocol MerchantHttpMethod: AnyMerchantHttpMethod {
     
     associatedtype T: Decodable
 
@@ -32,6 +33,7 @@ extension MerchantHttpMethod {
         nonNilMerchant.client
     }
     
+    // There are casses where the url GET //statuses/5f309adb3dd75b62ddacf344/comments
     func createURL(with pathParameters: [String: StringRepresentable]?,
                    and queryParameters: [String: StringRepresentable?]?) -> URL {
         let injectedPath = injectPath(with: pathParameters)
@@ -39,6 +41,7 @@ extension MerchantHttpMethod {
         var components = URLComponents(string: baseURL + injectedPath)
         components?.queryItems = query?.map { URLQueryItem(name: $0, value: $1?.stringRepresentation) }
         guard let url = components?.url else {
+            // TODO: this stops the program execution and you cannot see what the error is maybe we should log the errror
             preconditionFailure(
                 String(
                     format: .errorMalformedURL,
@@ -56,7 +59,7 @@ extension MerchantHttpMethod {
     private func injectPath(with pathParamters: [String: StringRepresentable]?) -> String {
         guard let pathParameters = pathParamters else { return path }
         
-        var newPath = path
+        var newPath = path //TODO: rename to mutable path
         for variable in getPathVariables(for: path) {
             guard let value = pathParameters[variable] else {
                 preconditionFailure(
@@ -86,7 +89,7 @@ extension MerchantHttpMethod {
         return globalQueries
     }
     
-    private func getPathVariables(for path: String) -> [String] {
+    private func getPathVariables(for path: String) -> [String] { // how many times does thids get called??
         let range = NSRange(location: 0, length: path.utf16.count)
         let regex = try! NSRegularExpression(pattern: "\\{.*?\\}")
         let res = regex.matches(in: path, options: [], range: range)

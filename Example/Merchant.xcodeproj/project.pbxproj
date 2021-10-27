@@ -48,7 +48,7 @@
 		A83B89C08B09F669E0AD718B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		D879DA0B664D9DDF3EE220B2 /* Pods_Merchant_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Merchant_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF673C7946F8F06F1A1D8A30 /* Pods-Merchant_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Merchant_Tests.debug.xcconfig"; path = "Target Support Files/Pods-Merchant_Tests/Pods-Merchant_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		FEAF2E10F51452499AF0CDD2 /* Merchant.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Merchant.podspec; path = ../Merchant.podspec; sourceTree = "<group>"; };
+		FEAF2E10F51452499AF0CDD2 /* Merchant.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Merchant.podspec; path = ../Merchant.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

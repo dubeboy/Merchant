@@ -1,5 +1,7 @@
 import Foundation
 
+// Add github link of where we got this please!!!!
+
 /// The StringRepresentable
 public protocol StringRepresentable {
     
