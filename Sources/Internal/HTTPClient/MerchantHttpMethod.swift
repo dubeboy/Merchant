@@ -37,9 +37,9 @@ extension MerchantHttpMethod {
     func createURL(with pathParameters: [String: StringRepresentable]?,
                    and queryParameters: [String: StringRepresentable?]?) -> URL {
         let injectedPath = injectPath(with: pathParameters)
-        let query = appendGlobalQuery(to: queryParameters)
+        let query = appendGlobalQuery(to: queryParameters ?? [:])
         var components = URLComponents(string: baseURL + injectedPath)
-        components?.queryItems = query?.map { URLQueryItem(name: $0, value: $1?.stringRepresentation) }
+        components?.queryItems = query.map { URLQueryItem(name: $0, value: $1?.stringRepresentation) }
         guard let url = components?.url else {
             // TODO: this stops the program execution and you cannot see what the error is maybe we should log the errror
             preconditionFailure(
@@ -74,8 +74,7 @@ extension MerchantHttpMethod {
         return newPath
     }
         
-    private func appendGlobalQuery(to queries: [String: StringRepresentable?]?) -> [String: StringRepresentable?]? {
-        if let queries = queries, !queries.isEmpty {
+    private func appendGlobalQuery(to queries: [String: StringRepresentable?]) -> [String: StringRepresentable?] {
             return queries.merging(globalQueries ?? [:]) {
                 _,_  in preconditionFailure(
                     String(
@@ -85,8 +84,6 @@ extension MerchantHttpMethod {
                     )
                 )
             }
-        }
-        return globalQueries
     }
     
     private func getPathVariables(for path: String) -> [String] { // how many times does thids get called??
